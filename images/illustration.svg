@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" rx="24" fill="url(#bgGrad)" />
+
+  <!-- Glowing background circles -->
+  <circle cx="200" cy="180" r="140" fill="#4f46e5" opacity="0.25" filter="url(#glow)" />
+  <circle cx="620" cy="380" r="130" fill="#06b6d4" opacity="0.2" filter="url(#glow)" />
+
+  <!-- Laptop Base & Screen -->
+  <!-- Screen Outer Frame -->
+  <rect x="130" y="80" width="540" height="340" rx="16" fill="#1e293b" stroke="#334155" stroke-width="3" />
+  <!-- Screen Inner Display -->
+  <rect x="146" y="96" width="508" height="308" rx="8" fill="#0b0f19" />
+
+  <!-- Laptop Hinge & Base -->
+  <path d="M 80 440 L 720 440 L 750 460 L 50 460 Z" fill="#334155" />
+  <rect x="340" y="440" width="120" height="6" rx="3" fill="#64748b" />
+  <path d="M 50 460 L 750 460 L 730 472 L 70 472 Z" fill="#1e293b" />
+
+  <!-- Exam UI Mockup inside Screen -->
+  <!-- Topbar -->
+  <rect x="146" y="96" width="508" height="42" fill="#131b2e" />
+  <circle cx="170" cy="117" r="6" fill="#ef4444" />
+  <circle cx="188" cy="117" r="6" fill="#f59e0b" />
+  <circle cx="206" cy="117" r="6" fill="#10b981" />
+  <text x="240" y="122" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600">EXAMSPHERE — Live Examination</text>
+  <rect x="540" y="105" width="94" height="24" rx="12" fill="#312e81" />
+  <text x="560" y="121" fill="#a5b4fc" font-family="monospace" font-size="12" font-weight="bold">⏱ 14:32</text>
+
+  <!-- Left Question Card -->
+  <rect x="166" y="152" width="310" height="232" rx="10" fill="#131b2e" stroke="#1e293b" />
+  <text x="184" y="178" fill="#818cf8" font-family="sans-serif" font-size="10" font-weight="bold">QUESTION 3 OF 10</text>
+  <text x="184" y="200" fill="#f8fafc" font-family="sans-serif" font-size="13" font-weight="bold">Which data structure follows LIFO?</text>
+
+  <!-- Options -->
+  <rect x="184" y="220" width="274" height="28" rx="6" fill="#1e293b" />
+  <text x="196" y="238" fill="#94a3b8" font-family="sans-serif" font-size="11">A. Queue</text>
+
+  <rect x="184" y="256" width="274" height="28" rx="6" fill="#312e81" stroke="#6366f1" stroke-width="1.5" />
+  <text x="196" y="274" fill="#ffffff" font-family="sans-serif" font-size="11" font-weight="bold">B. Stack  ✓</text>
+
+  <rect x="184" y="292" width="274" height="28" rx="6" fill="#1e293b" />
+  <text x="196" y="310" fill="#94a3b8" font-family="sans-serif" font-size="11">C. Array</text>
+
+  <rect x="184" y="328" width="274" height="28" rx="6" fill="#1e293b" />
+  <text x="196" y="346" fill="#94a3b8" font-family="sans-serif" font-size="11">D. Linked List</text>
+
+  <!-- Right Palette Card -->
+  <rect x="490" y="152" width="144" height="232" rx="10" fill="#131b2e" stroke="#1e293b" />
+  <text x="506" y="178" fill="#94a3b8" font-family="sans-serif" font-size="11" font-weight="bold">Palette</text>
+
+  <!-- Palette grid -->
+  <rect x="506" y="196" width="24" height="24" rx="6" fill="#10b981" />
+  <text x="515" y="212" fill="#fff" font-size="10" font-weight="bold">1</text>
+  <rect x="536" y="196" width="24" height="24" rx="6" fill="#10b981" />
+  <text x="545" y="212" fill="#fff" font-size="10" font-weight="bold">2</text>
+  <rect x="566" y="196" width="24" height="24" rx="6" fill="#6366f1" stroke="#a855f7" stroke-width="1.5" />
+  <text x="575" y="212" fill="#fff" font-size="10" font-weight="bold">3</text>
+  <rect x="596" y="196" width="24" height="24" rx="6" fill="#334155" />
+  <text x="605" y="212" fill="#94a3b8" font-size="10">4</text>
+
+  <rect x="506" y="226" width="24" height="24" rx="6" fill="#334155" />
+  <text x="515" y="242" fill="#94a3b8" font-size="10">5</text>
+  <rect x="536" y="226" width="24" height="24" rx="6" fill="#334155" />
+  <text x="545" y="242" fill="#94a3b8" font-size="10">6</text>
+  <rect x="566" y="226" width="24" height="24" rx="6" fill="#334155" />
+  <text x="575" y="242" fill="#94a3b8" font-size="10">7</text>
+  <rect x="596" y="226" width="24" height="24" rx="6" fill="#334155" />
+  <text x="605" y="242" fill="#94a3b8" font-size="10">8</text>
+
+  <!-- Submit button mock -->
+  <rect x="506" y="336" width="112" height="32" rx="8" fill="url(#primaryGrad)" />
+  <text x="530" y="356" fill="#fff" font-family="sans-serif" font-size="10" font-weight="bold">SUBMIT ✓</text>
+
+  <!-- Floating Achievement Badge -->
+  <g transform="translate(60, 260)" filter="url(#glow)">
+    <rect width="140" height="74" rx="14" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" opacity="0.95" />
+    <text x="18" y="30" font-size="20">⚡</text>
+    <text x="48" y="28" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="bold">Instant Score</text>
+    <text x="18" y="54" fill="#38bdf8" font-family="sans-serif" font-size="18" font-weight="900">95% Top</text>
+  </g>
+
+  <!-- Floating Secure Badge -->
+  <g transform="translate(580, 20)" filter="url(#glow)">
+    <rect width="150" height="60" rx="14" fill="#1e293b" stroke="#10b981" stroke-width="1.5" opacity="0.95" />
+    <text x="16" y="36" font-size="20">🛡️</text>
+    <text x="46" y="26" fill="#f8fafc" font-family="sans-serif" font-size="11" font-weight="bold">Anti-Cheating</text>
+    <text x="46" y="44" fill="#10b981" font-family="sans-serif" font-size="10">Auto Timer Sync</text>
+  </g>
+</svg>
