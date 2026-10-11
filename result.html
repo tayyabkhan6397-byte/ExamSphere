@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Detailed Examination Report | ExamSphere Pro</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="result-page-wrapper">
+
+    <!-- TOP HEADER -->
+    <header class="topbar">
+        <div class="logo">EXAM<span>SPHERE</span></div>
+        <div class="topbar-right">
+            <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <span>Theme</span>
+            </button>
+            <a href="student.html" class="nav-btn small">Student Portal</a>
+            <a href="index.html" class="btn-sm-danger">Sign Out</a>
+        </div>
+    </header>
+
+    <main class="result-container">
+
+        <!-- SCORE SUMMARY HERO CARD -->
+        <section class="result-hero-card">
+
+            <div class="result-header">
+                <div class="result-icon-circle" id="resultIcon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                </div>
+                <div class="grade-pill-badge" id="gradeBadge">GRADE A</div>
+                <h1 id="resultExamName">Examination Report</h1>
+                <p id="resultMessage" class="result-submessage">
+                    Your answers have been evaluated with instant detailed grading.
+                </p>
+            </div>
+
+            <!-- SCORE BIG DISPLAY -->
+            <div class="score-display-wrapper">
+                <div class="score-main">
+                    <span class="score-big" id="finalScore">0</span>
+                    <span class="score-total" id="finalScoreTotal">/ 0 Marks</span>
+                </div>
+                <div class="percentage-pill" id="percentage">0%</div>
+            </div>
+
+            <!-- 4-METRIC STATS -->
+            <div class="result-stats-row">
+                <div class="res-stat-box">
+                    <small>Correct</small>
+                    <b id="statCorrect" class="text-green">0</b>
+                </div>
+                <div class="res-stat-box">
+                    <small>Incorrect</small>
+                    <b id="statWrong" class="text-red">0</b>
+                </div>
+                <div class="res-stat-box">
+                    <small>Total Questions</small>
+                    <b id="statTotalQuestions">0</b>
+                </div>
+                <div class="res-stat-box">
+                    <small>Accuracy</small>
+                    <b id="statPercentage" class="text-purple">0%</b>
+                </div>
+            </div>
+
+            <div class="result-hero-actions">
+                <button id="downloadCertBtn" class="gradient-btn" onclick="openCertificateModal()" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Download Certificate</span>
+                </button>
+                <a href="student.html" class="btn secondary">
+                    Student Dashboard &rarr;
+                </a>
+                <a href="#questionReviewSection" class="btn secondary">
+                    Review Questions &darr;
+                </a>
+            </div>
+
+            <!-- EARNED CERTIFICATE PROMINENT BANNER -->
+            <div id="certAvailableBanner" class="cert-earned-banner" style="display: none;">
+                <div class="cert-earned-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                </div>
+                <div class="cert-earned-text">
+                    <b>Official Achievement Certificate Earned!</b>
+                    <span>You passed with <strong id="bannerPct" style="color: var(--green);">0%</strong>. Your official verified completion credential is ready.</span>
+                </div>
+                <button type="button" class="gradient-btn" onclick="openCertificateModal()" style="padding: 10px 20px; font-size: 0.9rem; flex-shrink: 0;">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    <span>Print / Download Certificate</span>
+                </button>
+            </div>
+
+        </section>
+
+
+        <!-- DETAILED QUESTION-BY-QUESTION REVIEW SECTION -->
+        <section class="review-section" id="questionReviewSection">
+
+            <div class="review-section-head">
+                <div>
+                    <span>PERFORMANCE ANALYSIS</span>
+                    <h2>Question-by-Question Review</h2>
+                </div>
+                <div class="review-filter-pills">
+                    <button class="filter-pill active" onclick="filterReview('all')">All Questions</button>
+                    <button class="filter-pill" onclick="filterReview('correct')">Correct</button>
+                    <button class="filter-pill" onclick="filterReview('wrong')">Incorrect</button>
+                    <button class="filter-pill" onclick="filterReview('unanswered')">Skipped</button>
+                </div>
+            </div>
+
+            <!-- DYNAMIC QUESTION REVIEW LIST -->
+            <div class="review-list" id="reviewListContainer">
+                <p class="text-muted">Loading question analysis...</p>
+            </div>
+
+            <div class="review-bottom-actions">
+                <a href="student.html" class="gradient-btn">
+                    Done Reviewing &mdash; Return to Dashboard
+                </a>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- OFFICIAL CERTIFICATE MODAL -->
+<div id="certificateModal" class="modal">
+    <div class="modal-box certificate-modal-box">
+        <div class="cert-actions-bar">
+            <span style="font-weight:700; font-size: 0.9rem; color: var(--text-main);">Official Certificate of Completion</span>
+            <div style="display: flex; gap: 8px;">
+                <button class="gradient-btn" onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                        <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    <span>Print / Save PDF</span>
+                </button>
+                <button class="btn secondary modal-close-btn" onclick="closeCertificateModal()">&times;</button>
+            </div>
+        </div>
+
+        <div class="certificate-paper">
+            <div class="cert-corner-ornament cert-corner-tl"></div>
+            <div class="cert-corner-ornament cert-corner-tr"></div>
+            <div class="cert-corner-ornament cert-corner-bl"></div>
+            <div class="cert-corner-ornament cert-corner-br"></div>
+
+            <div class="cert-header">
+                <div class="cert-logo">EXAM<span>SPHERE</span> PRO</div>
+                <div class="cert-subtitle">VERIFIED DIGITAL ASSESSMENT CREDENTIAL</div>
+                <h1 class="cert-title">Certificate of Achievement</h1>
+            </div>
+
+            <p class="cert-recipient-label">This is proudly awarded to</p>
+            <h2 class="cert-candidate-name" id="certStudentName">Alex Morgan</h2>
+
+            <p class="cert-body-text">
+                for demonstrating proficiency and successfully passing the official online examination in
+                <br><strong id="certExamName" style="font-size: 1.25rem; color: #4f46e5;">Web Development Certification</strong>
+                <br>achieving a verified score of <strong id="certScore">0 / 0</strong> (<strong id="certPercentage">0%</strong>).
+            </p>
+
+            <div class="cert-footer-row">
+                <div style="text-align: left;">
+                    <small style="display: block; color: #64748b;">Date of Award</small>
+                    <b id="certDate" style="color: #0f172a;">September 20, 2026</b>
+                    <div style="margin-top: 4px; font-family: monospace; font-size: 0.72rem; color: #64748b;">
+                        VERIFICATION: <span id="certId">ESP-CERT-2026</span>
+                    </div>
+                </div>
+
+                <div class="cert-seal">
+                    <span>★ ★ ★</span>
+                    <span>VERIFIED</span>
+                    <span>EXAMSPHERE</span>
+                </div>
+
+                <div class="cert-signature-block">
+                    <div style="font-family: cursive; font-size: 1.35rem; color: #1e1b4b; margin-bottom: 2px;">
+                        Academic Council
+                    </div>
+                    <small style="display: block; font-weight: 700; color: #334155;">Director of Examinations</small>
+                    <small style="color: #64748b; font-size: 0.72rem;">ExamSphere Assessment Board</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/result.js"></script>
+
+</body>
+</html>

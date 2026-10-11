@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Register | ExamSphere</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-body">
+
+<div class="auth-top-bar">
+    <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <span>Theme</span>
+    </button>
+</div>
+
+<div class="auth-container">
+
+    <div class="auth-brand">
+        <div class="logo">EXAM<span>SPHERE</span></div>
+        <p>Create your student account</p>
+    </div>
+
+    <div class="auth-box">
+
+        <div class="auth-icon-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </div>
+
+        <h1>Student Registration</h1>
+        <p class="auth-sub">Join the online examination platform</p>
+
+        <form onsubmit="registerUser(event)">
+
+            <label>Full Name</label>
+            <input id="regName" placeholder="Enter your full name" required>
+
+            <label>Email Address</label>
+            <input id="regEmail" type="email" placeholder="Enter email" required>
+
+            <label>Password</label>
+            <input id="regPassword" type="password" placeholder="Create password" required>
+
+            <label>Confirm Password</label>
+            <input id="regConfirm" type="password" placeholder="Confirm password" required>
+
+            <button class="auth-btn">
+                CREATE ACCOUNT →
+            </button>
+
+        </form>
+
+        <p id="registerMsg" class="login-msg"></p>
+
+        <p class="register-text">
+            Already registered?
+            <a href="login.html?role=student">Login</a>
+        </p>
+
+        <a href="index.html" class="back-home">← Back to Home</a>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

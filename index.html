@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>ExamSphere | Enterprise Online Examination & Code Assessment Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* =========================================================
+           HIGH-END SAAS PALETTE & HERO LAYOUT
+           ========================================================= */
+
+        .vibrant-hero {
+            display: grid;
+            grid-template-columns: 1.18fr 0.82fr;
+            gap: 56px;
+            padding: 72px 8% 88px;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            background: radial-gradient(circle at 18% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+                        radial-gradient(circle at 82% 70%, rgba(124, 58, 237, 0.10) 0%, transparent 45%),
+                        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glowing Pulse Badge */
+        .glow-pill-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--primary-bg);
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 800;
+            border-radius: var(--radius-full);
+            margin-bottom: 22px;
+            box-shadow: 0 0 20px var(--primary-glow);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseGlow 1.8s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        /* Hero Typography */
+        .hero-headline {
+            font-size: 3.6rem;
+            line-height: 1.12;
+            font-weight: 900;
+            letter-spacing: -0.035em;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .gradient-span {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero-lead {
+            font-size: 1.1rem;
+            line-height: 1.68;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 580px;
+        }
+
+        /* Feature Pills Row */
+        .hero-feature-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 34px;
+        }
+
+        .feature-tag-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.83rem;
+            font-weight: 700;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .feature-tag-chip:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-tag-chip svg {
+            color: var(--primary);
+        }
+
+        /* Metric Counters Row */
+        .hero-metric-bar {
+            display: flex;
+            gap: 36px;
+            padding-top: 26px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .metric-item b {
+            display: block;
+            font-size: 1.55rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .metric-item span {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        /* RIGHT: SLEEK STUDENT LOGIN CARD */
+        .student-portal-card {
+            background: var(--bg-card);
+            border: 1.5px solid rgba(99, 102, 241, 0.28);
+            border-radius: 24px;
+            padding: 38px 34px;
+            box-shadow: 0 25px 60px rgba(79, 70, 229, 0.12),
+                        0 2px 10px rgba(0, 0, 0, 0.04);
+            position: relative;
+            backdrop-filter: blur(16px);
+        }
+
+        .card-top-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .student-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.74rem;
+            padding: 5px 12px;
+            border-radius: var(--radius-full);
+            letter-spacing: 0.05em;
+        }
+
+        .student-active-avatar-stack {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .avatar-dots {
+            display: flex;
+            margin-right: -4px;
+        }
+
+        .avatar-dots img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--bg-card);
+            margin-left: -8px;
+            background: var(--bg-surface);
+        }
+
+        .avatar-dots img:first-child {
+            margin-left: 0;
+        }
+
+        .portal-card-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+
+        .portal-card-header p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 22px 0 18px;
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-divider span {
+            padding: 0 12px;
+        }
+
+        .social-buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .btn-social-oauth {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 12px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-social-oauth:hover {
+            border-color: var(--primary);
+            background: var(--bg-card);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Showcase Architecture 3-Grid */
+        .showcase-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .showcase-pillar-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 30px 26px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .showcase-pillar-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pillar-icon-box {
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .showcase-pillar-card h3 {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .showcase-pillar-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.58;
+        }
+
+        /* OAUTH & ADMIN MODAL OVERLAYS */
+        .social-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px;
+        }
+
+        .social-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .social-modal-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-color);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.94);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }
+
+        .social-modal-overlay.active .social-modal-card {
+            transform: scale(1);
+        }
+
+        .social-modal-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .social-modal-close-btn:hover {
+            color: var(--text-main);
+            border-color: var(--primary);
+            background: var(--primary-bg);
+        }
+
+        .social-modal-body {
+            padding: 28px 24px;
+        }
+
+        .google-modal-header,
+        .github-auth-header,
+        .linkedin-auth-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .google-logo-svg,
+        .linkedin-logo-svg {
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 12px;
+            display: block;
+        }
+
+        .github-connect-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+
+        .github-connect-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-github-green {
+            background: #238636;
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-github-green:hover {
+            background: #2ea043;
+        }
+
+        .btn-linkedin-blue {
+            background: #0A66C2;
+            color: #ffffff;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-linkedin-blue:hover {
+            background: #004182;
+        }
+
+        .github-perms-list {
+            list-style: none;
+            padding: 0;
+            margin: 14px 0;
+        }
+
+        .github-perm-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .github-perm-item svg {
+            color: #10b981;
+            flex-shrink: 0;
+        }
+
+        .google-disclaimer {
+            font-size: 0.74rem;
+            color: var(--text-dim);
+            text-align: center;
+            margin-top: 14px;
+            line-height: 1.4;
+        }
+
+        .modal-auth-loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 10px;
+            text-align: center;
+        }
+
+        .modal-auth-loading.active {
+            display: flex;
+        }
+
+        .auth-spinner {
+            width: 44px;
+            height: 44px;
+            border: 3.5px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer Staff Discreet Link */
+        .footer-staff-link {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            padding: 7px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--bg-surface);
+            cursor: pointer;
+        }
+
+        .footer-staff-link:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-bg);
+        }
+
+        @media (max-width: 960px) {
+            .vibrant-hero {
+                grid-template-columns: 1fr;
+                padding: 44px 6%;
+            }
+            .hero-headline {
+                font-size: 2.6rem;
+            }
+            .showcase-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="logo">
+        EXAM<span>SPHERE</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#platform">Platform</a>
+        <a href="#proctoring">Proctoring</a>
+        <a href="#about">About</a>
+
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Light / Dark Theme">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span>Theme</span>
+        </button>
+    </div>
+</nav>
+
+
+<!-- HERO SECTION: LEFT (DYNAMIC BRANDING & METRICS), RIGHT (STUDENT SIGN IN CARD) -->
+<section class="vibrant-hero" id="home">
+
+    <!-- LEFT COLUMN: POWERFUL BRANDING & FEATURES OVERVIEW -->
+    <div class="hero-left-content">
+
+        <div class="glow-pill-badge">
+            <span class="pulse-dot"></span>
+            <span>ENTERPRISE EXAMINATION & CODE ASSESSMENT SUITE</span>
+        </div>
+
+        <h1 class="hero-headline">
+            Secure Digital Exams.
+            <span class="gradient-span">Automated Code Evaluation.</span>
+        </h1>
+
+        <p class="hero-lead">
+            The next-generation assessment cloud for academic institutions and developer teams. Engineered with browser-locked anti-cheating proctoring, live code execution, instant scorecards, and verifiable achievement transcripts.
+        </p>
+
+        <!-- 4 POWERFUL HIGHLIGHT CHIPS -->
+        <div class="hero-feature-tags">
+            <div class="feature-tag-chip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Anti-Cheating Proctoring</span>
+            </div>
+
+            <div class="feature-tag-chip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Live Code Playground</span>
+            </div>
+
+            <div class="feature-tag-chip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                <span>Instant Scorecards & Certificate</span>
+            </div>
+
+            <div class="feature-tag-chip">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Heap-Sorted Leaderboards</span>
+            </div>
+        </div>
+
+        <!-- METRIC COUNTERS -->
+        <div class="hero-metric-bar">
+            <div class="metric-item">
+                <b>50+</b>
+                <span>Live Modules</span>
+            </div>
+            <div class="metric-item">
+                <b>10,000+</b>
+                <span>Questions Bank</span>
+            </div>
+            <div class="metric-item">
+                <b>100%</b>
+                <span>Automated Scoring</span>
+            </div>
+            <div class="metric-item">
+                <b>&lt; 50ms</b>
+                <span>Execution Speed</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT COLUMN: STUDENT SIGN IN CARD WITH SOCIAL OAUTH -->
+    <div class="hero-right-portal">
+
+        <div class="student-portal-card" id="studentLoginCard">
+
+            <div class="card-top-indicator">
+                <span class="role-badge student-badge">STUDENT PORTAL</span>
+                <div class="student-active-avatar-stack">
+                    <div class="avatar-dots">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Felix" alt="Candidate 1">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Aria" alt="Candidate 2">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Leo" alt="Candidate 3">
+                    </div>
+                    <span>2.4k+ Candidates Active</span>
+                </div>
+            </div>
+
+            <div class="portal-card-header">
+                <h2>Candidate Sign In</h2>
+                <p>Enter your student credentials to access your examinations</p>
+            </div>
+
+            <!-- EMAIL PASSWORD FORM (FIRST) -->
+            <form onsubmit="handleFrontStudentLogin(event)">
+
+                <!-- EMAIL -->
+                <div class="input-group" style="margin-bottom: 16px;">
+                    <label for="frontEmail" style="display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px;">Email Address</label>
+                    <div class="input-with-icon">
+                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <input
+                            type="email"
+                            id="frontEmail"
+                            placeholder="Enter your email address"
+                            required
+                            autocomplete="email"
+                            style="width: 100%; padding: 12px 14px 12px 44px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-main);"
+                        >
+                    </div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="input-group" style="margin-bottom: 22px;">
+                    <label for="frontPassword" style="display: block; font-weight: 600; font-size: 0.88rem; margin-bottom: 6px;">Password</label>
+                    <div class="password-box">
+                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input
+                            type="password"
+                            id="frontPassword"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                            style="width: 100%; padding: 12px 44px 12px 44px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-main);"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            onclick="toggleFrontPassword()"
+                            aria-label="Toggle password visibility">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON (SIGN IN ONLY) -->
+                <button type="submit" class="gradient-btn full-width" style="padding: 14px; font-size: 1rem;">
+                    <span>Sign In</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+
+            <p id="frontLoginMsg" class="login-msg" style="margin-top: 12px;"></p>
+
+            <!-- OR DIVIDER -->
+            <div class="auth-divider">
+                <span>Or continue with</span>
+            </div>
+
+            <!-- SOCIAL LOGIN BUTTONS (NOW BELOW FORM) -->
+            <div class="social-auth-section">
+                <div class="social-buttons-grid">
+                    <!-- GOOGLE -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('google')" title="Sign in with Google">
+                        <svg width="18" height="18" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+
+                    <!-- GITHUB -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('github')" title="Sign in with GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </button>
+
+                    <!-- LINKEDIN -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('linkedin')" title="Sign in with LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76A1.66 1.66 0 0 0 4.8 7.1a1.66 1.66 0 0 0 0 3.32 1.66 1.66 0 0 0 1.66-1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--border-color); font-size: 0.85rem;">
+                <span class="text-dim">New Candidate?</span>
+                <a href="register.html" style="font-weight: 700; color: var(--primary);">Create Student Account &rarr;</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PLATFORM CAPABILITIES SECTION -->
+<section class="features" id="platform">
+    <div class="section-title">
+        <span>PLATFORM ARCHITECTURE</span>
+        <h2>Engineered For <b>High-Stakes Examination</b></h2>
+        <p>Comprehensive assessment suite designed for students, educators, and enterprise administrators.</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card blue">
+            <div style="color: var(--primary); margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+            </div>
+            <h3>Comprehensive Question Bank</h3>
+            <p>Categorized MCQs with multi-level difficulty, customizable marks, and detailed solutions.</p>
+        </div>
+
+        <div class="feature-card purple">
+            <div style="color: var(--purple); margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+            </div>
+            <h3>Code Practice Playground</h3>
+            <p>Integrated code editor running JavaScript and Python against automated test suites in real-time.</p>
+        </div>
+
+        <div class="feature-card cyan">
+            <div style="color: var(--cyan); margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <h3>Tab-Switch Proctoring</h3>
+            <p>Continuous monitoring detecting window blur or tab navigation with automated 3-strike limits.</p>
+        </div>
+
+        <div class="feature-card green">
+            <div style="color: var(--green); margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+            </div>
+            <h3>Instant Analytics & Scorecards</h3>
+            <p>Instantaneous scorecards, question-level breakdown, and actionable performance insights.</p>
+        </div>
+
+        <div class="feature-card pink">
+            <div style="color: #ec4899; margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+            </div>
+            <h3>Printable Achievement Certificates</h3>
+            <p>Official digital credentials with verified scores generated automatically upon passing exams.</p>
+        </div>
+
+        <div class="feature-card orange">
+            <div style="color: var(--amber); margin-bottom: 12px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+            </div>
+            <h3>Dynamic Leaderboards</h3>
+            <p>Competitive student standings and percentile metrics powered by heap data structures.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- PROCTORING & INTEGRITY SECTION -->
+<section style="padding: 72px 8% 80px; background: var(--bg-surface); border-top: 1px solid var(--border-color);" id="proctoring">
+    <div class="section-title">
+        <span>ACADEMIC INTEGRITY</span>
+        <h2>Multi-Layered <b>Anti-Cheating Architecture</b></h2>
+        <p>Ensuring 100% fair and authentic assessments without expensive hardware requirements.</p>
+    </div>
+
+    <div class="showcase-grid-3">
+        <div class="showcase-pillar-card">
+            <div class="pillar-icon-box" style="background: var(--red-bg); color: var(--red);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <h3>Tab-Switch Detection</h3>
+            <p>Monitors window blur and visibility state changes in real time. Automatically logs strikes and triggers emergency exam termination on 3 violations.</p>
+        </div>
+
+        <div class="showcase-pillar-card">
+            <div class="pillar-icon-box" style="background: var(--primary-bg); color: var(--primary);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <h3>Synchronized Timer Lockdown</h3>
+            <p>Strict server and client synchronized countdowns with automatic submission when duration expires, preventing unauthorized time extension.</p>
+        </div>
+
+        <div class="showcase-pillar-card">
+            <div class="pillar-icon-box" style="background: var(--green-bg); color: var(--green);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <h3>Tamper-Proof Verification</h3>
+            <p>Each passed examination generates a cryptographically stamped digital achievement certificate tied to candidate identity and score records.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+    <div class="about-box">
+        <div>
+            <span class="mini-title">ABOUT EXAMSPHERE</span>
+            <h2>Smarter Exams. <span>Better Results.</span></h2>
+            <p>
+                ExamSphere is designed to deliver reliable, secure, and intuitive digital evaluations for academic institutions and developer testing.
+            </p>
+            <p>
+                From customizable question banks to browser-based programming playgrounds, everything operates seamlessly with high performance.
+            </p>
+        </div>
+
+        <div class="about-stats">
+            <div>
+                <b>24/7</b>
+                <span>Availability</span>
+            </div>
+            <div>
+                <b>100%</b>
+                <span>Automated</span>
+            </div>
+            <div>
+                <b>&infin;</b>
+                <span>Questions</span>
+            </div>
+            <div>
+                <b>&lt; 50ms</b>
+                <span>Latency</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- FOOTER WITH DISCREET CORNER ADMIN ACCESS (IN-PAGE MODAL) -->
+<footer>
+    <div class="logo">
+        EXAM<span>SPHERE</span>
+    </div>
+    <p>
+        &copy; 2026 ExamSphere &bull; Enterprise Examination & Code Assessment Platform
+    </p>
+    <a href="javascript:void(0)" onclick="openAdminModal()" class="footer-staff-link" title="Authorized Administrator Access">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+        <span>Admin Access</span>
+    </a>
+</footer>
+
+
+<!-- ==========================================
+     IN-PAGE ADMINISTRATOR LOGIN MODAL (NO SEPARATE PAGE)
+     ========================================== -->
+<div id="adminModal" class="social-modal-overlay" onclick="handleModalBackdropClick(event, 'adminModal')">
+    <div class="social-modal-card" style="max-width: 420px;">
+        <button type="button" class="social-modal-close-btn" onclick="closeSocialModal('adminModal')" aria-label="Close dialog">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <div class="social-modal-body">
+            <div style="text-align: center; margin-bottom: 22px;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary-bg); border: 1.5px solid var(--primary); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; color: var(--primary);">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <span class="role-badge admin-badge" style="margin-bottom: 8px;">ADMIN PORTAL</span>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">Administrator Sign In</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Internal administrative access for test controllers and administrators</p>
+            </div>
+
+            <form onsubmit="handleModalAdminLogin(event)">
+                <div class="input-group" style="margin-bottom: 14px;">
+                    <label for="modalAdminEmail" style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">Admin Email</label>
+                    <div class="input-with-icon">
+                        <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <input type="email" id="modalAdminEmail" placeholder="admin@examsphere.com" required style="width: 100%; padding: 10px 12px 10px 40px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 18px;">
+                    <label for="modalAdminPassword" style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-bottom: 6px;">Admin Password</label>
+                    <div class="password-box">
+                        <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input type="password" id="modalAdminPassword" placeholder="Enter admin password" required style="width: 100%; padding: 10px 40px 10px 40px; border: 1.5px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        <button type="button" class="password-toggle-btn" onclick="toggleModalAdminPassword()" aria-label="Toggle password visibility">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="gradient-btn full-width" style="padding: 12px; font-size: 0.95rem;">
+                    <span>Access Admin Portal &rarr;</span>
+                </button>
+            </form>
+
+            <p id="modalAdminMsg" class="login-msg" style="margin-top: 12px;"></p>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCRIPTS -->
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script>
+    // Password Toggles
+    function toggleFrontPassword() {
+        const input = document.getElementById("frontPassword");
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function toggleModalAdminPassword() {
+        const input = document.getElementById("modalAdminPassword");
+        if (!input) return;
+        input.type = input.type === "password" ? "text" : "password";
+    }
+
+    // Modal Control Functions
+    function openSocialModal(provider) {
+        const modalId = provider === 'google' ? 'googleModal' : provider === 'github' ? 'githubModal' : 'linkedinModal';
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            const firstInput = modal.querySelector("input");
+            if (firstInput) setTimeout(() => firstInput.focus(), 100);
+        }
+    }
+
+    function openAdminModal() {
+        const modal = document.getElementById("adminModal");
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            const emailInput = document.getElementById("modalAdminEmail");
+            if (emailInput) setTimeout(() => emailInput.focus(), 100);
+        }
+    }
+
+    function closeSocialModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function handleModalBackdropClick(e, modalId) {
+        if (e.target.id === modalId) {
+            closeSocialModal(modalId);
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeSocialModal('googleModal');
+            closeSocialModal('githubModal');
+            closeSocialModal('linkedinModal');
+            closeSocialModal('adminModal');
+        }
+    });
+
+    // Custom OAuth Account Handler
+    function selectSocialAccount(provider, name, email, avatar) {
+        const normalView = document.getElementById(`${provider}NormalView`);
+        const loadingState = document.getElementById(`${provider}LoadingState`);
+        const subTitle = document.getElementById(`${provider}LoadingSubtitle`);
+
+        if (normalView) normalView.style.display = 'none';
+        if (loadingState) loadingState.classList.add('active');
+        if (subTitle) subTitle.textContent = `Signing in as ${name}... Launching Student Portal...`;
+
+        setTimeout(() => {
+            const studentUser = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                avatar: avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`,
+                role: "student"
+            };
+
+            localStorage.setItem("user", JSON.stringify(studentUser));
+            localStorage.setItem("role", "student");
+
+            const users = JSON.parse(localStorage.getItem("es_users") || "[]");
+            const idx = users.findIndex(u => u.email === studentUser.email);
+            if (idx >= 0) {
+                users[idx] = { ...users[idx], ...studentUser };
+            } else {
+                users.push(studentUser);
+            }
+            localStorage.setItem("es_users", JSON.stringify(users));
+
+            window.location.href = "student.html";
+        }, 550);
+    }
+
+    function submitCustomOAuth(provider) {
+        const nameInput = document.getElementById(`${provider}CustomName`);
+        const emailInput = document.getElementById(`${provider}CustomEmail`);
+
+        const name = (nameInput?.value || "").trim() || (provider === 'google' ? 'Google Candidate' : provider === 'github' ? 'GitHub Developer' : 'LinkedIn Member');
+        const email = (emailInput?.value || "").trim() || `candidate.${provider}@examsphere.com`;
+        const avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+
+        selectSocialAccount(provider, name, email, avatar);
+    }
+
+    // In-Page Front Student Sign In
+    async function handleFrontStudentLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById("frontEmail").value.trim();
+        const password = document.getElementById("frontPassword").value.trim();
+        const msg = document.getElementById("frontLoginMsg");
+
+        if (!email || !password) {
+            if (msg) {
+                msg.textContent = "Please enter email and password.";
+                msg.className = "login-msg error-msg";
+            }
+            return;
+        }
+
+        if (msg) {
+            msg.textContent = "Authenticating candidate...";
+            msg.className = "login-msg info-msg";
+        }
+
+        try {
+            const res = await API.login({
+                email: email,
+                password: password,
+                role: "student"
+            });
+
+            if (res.success) {
+                localStorage.setItem("role", "student");
+                localStorage.setItem("user", JSON.stringify(res.user));
+
+                if (msg) {
+                    msg.textContent = "Verified! Redirecting to student portal...";
+                    msg.className = "login-msg success-msg";
+                }
+
+                setTimeout(() => {
+                    window.location.href = "student.html";
+                }, 400);
+            } else {
+                if (msg) {
+                    msg.textContent = res.message || "Invalid credentials.";
+                    msg.className = "login-msg error-msg";
+                }
+            }
+        } catch (error) {
+            if (msg) {
+                msg.textContent = "Server connection error.";
+                msg.className = "login-msg error-msg";
+            }
+        }
+    }
+
+    // In-Page Administrator Login Handler (Admin Only)
+    async function handleModalAdminLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById("modalAdminEmail").value.trim();
+        const password = document.getElementById("modalAdminPassword").value.trim();
+        const msg = document.getElementById("modalAdminMsg");
+
+        if (!email || !password) {
+            if (msg) {
+                msg.textContent = "Please enter administrator email and password.";
+                msg.className = "login-msg error-msg";
+            }
+            return;
+        }
+
+        if (msg) {
+            msg.textContent = "Authorizing administrator credentials...";
+            msg.className = "login-msg info-msg";
+        }
+
+        try {
+            const res = await API.login({
+                email: email,
+                password: password,
+                role: "admin"
+            });
+
+            if (res.success) {
+                localStorage.setItem("role", "admin");
+                localStorage.setItem("user", JSON.stringify(res.user));
+
+                if (msg) {
+                    msg.textContent = "Authorized! Launching Administrator Dashboard...";
+                    msg.className = "login-msg success-msg";
+                }
+
+                setTimeout(() => {
+                    window.location.href = "admin.html";
+                }, 400);
+            } else {
+                if (msg) {
+                    msg.textContent = res.message || "Invalid administrator credentials.";
+                    msg.className = "login-msg error-msg";
+                }
+            }
+        } catch (error) {
+            if (msg) {
+                msg.textContent = "Server connection error.";
+                msg.className = "login-msg error-msg";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

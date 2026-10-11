@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In | ExamSphere Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="auth-body">
+
+    <!-- MAIN AUTH CONTAINER -->
+    <div class="auth-container">
+
+        <!-- BRAND -->
+        <div class="auth-brand">
+            <div class="logo">
+                EXAM<span>SPHERE</span>
+            </div>
+            <p>Enterprise Online Examination & Code Evaluation Platform</p>
+        </div>
+
+        <!-- LOGIN BOX -->
+        <div class="auth-box">
+
+            <!-- HEADER & BADGE -->
+            <div class="auth-box-header">
+                <div class="auth-icon-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <span id="loginRoleBadge" class="role-badge student-badge">STUDENT PORTAL</span>
+                <h1 id="loginTitle">Student Sign In</h1>
+                <p id="loginSub" class="auth-sub">
+                    Enter your credentials to access your examinations and code practice
+                </p>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form onsubmit="login(event)">
+
+                <!-- EMAIL -->
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-with-icon">
+                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email address"
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-box">
+                        <svg class="field-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter password"
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button
+                            type="button"
+                            class="password-toggle-btn"
+                            onclick="togglePassword()"
+                            aria-label="Toggle password visibility">
+                            <svg id="passEyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- LOGIN BUTTON -->
+                <button type="submit" class="auth-btn">
+                    <span>Sign In</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+
+            </form>
+
+            <!-- LOGIN MESSAGE -->
+            <p id="loginMsg" class="login-msg"></p>
+
+            <!-- SOCIAL AUTH SECTION (FOR STUDENTS) -->
+            <div id="socialAuthSectionLogin">
+                <div class="auth-divider" style="margin: 18px 0;">
+                    <span>Or continue with</span>
+                </div>
+                <div class="social-buttons-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px;">
+                    <!-- GOOGLE -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('google')" title="Sign in with Google">
+                        <svg width="18" height="18" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+
+                    <!-- GITHUB -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('github')" title="Sign in with GitHub">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </button>
+
+                    <!-- LINKEDIN -->
+                    <button type="button" class="btn-social-oauth" onclick="openSocialModal('linkedin')" title="Sign in with LinkedIn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A66C2">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76A1.66 1.66 0 0 0 4.8 7.1a1.66 1.66 0 0 0 0 3.32 1.66 1.66 0 0 0 1.66-1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                        </svg>
+                        <span>LinkedIn</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- REGISTER LINK -->
+            <div id="registerLinkBox" class="register-text">
+                New candidate?
+                <a href="register.html">Create Student Account</a>
+            </div>
+
+            <!-- BACK TO HOME -->
+            <div class="auth-aux-links">
+                <a href="index.html" class="back-home">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back to Home</span>
+                </a>
+            </div>
+
+            <!-- DISCREET ADMIN PORTAL GATEWAY -->
+            <div class="discreet-admin-section">
+                <div id="adminAccessBox">
+                    <button type="button" class="btn-discreet-admin" onclick="setRole('admin')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                        <span>Administrator Portal</span>
+                    </button>
+                </div>
+
+                <div id="studentAccessBox" style="display: none;">
+                    <button type="button" class="btn-discreet-admin active" onclick="setRole('student')">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span>Return to Student Sign In</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE GOOGLE OAUTH MODAL (OWN USER ACCOUNT)
+         ========================================== -->
+    <div id="googleModal" class="social-modal-overlay" onclick="handleModalBackdropClick(event, 'googleModal')">
+        <div class="social-modal-card">
+            <button type="button" class="social-modal-close-btn" onclick="closeSocialModal('googleModal')" aria-label="Close dialog">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="social-modal-body">
+                <div id="googleNormalView">
+                    <div class="google-modal-header">
+                        <svg class="google-logo-svg" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                        </svg>
+                        <h3>Sign In with Google</h3>
+                        <p>Enter your Google account details to access ExamSphere Pro</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); submitCustomOAuth('google');">
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Your Full Name</label>
+                            <input type="text" id="googleCustomName" placeholder="Enter your full name" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <div style="margin-bottom: 18px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Your Google / Gmail Address</label>
+                            <input type="email" id="googleCustomEmail" placeholder="your.name@gmail.com" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <button type="submit" class="btn-social-oauth" style="width: 100%; background: #4285F4; color: #fff; border: none; padding: 13px; font-weight: 700; font-size: 0.95rem; border-radius: var(--radius-md);">
+                            <span>Continue with Google &rarr;</span>
+                        </button>
+                    </form>
+
+                    <p class="google-disclaimer">
+                        Secure Google OAuth verification &bull; Real identity will be displayed on your exam certificates.
+                    </p>
+                </div>
+
+                <!-- In-Flight Loading State -->
+                <div id="googleLoadingState" class="modal-auth-loading">
+                    <div class="auth-spinner" style="border-top-color: #4285F4;"></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Authenticating with Google...</h4>
+                    <p id="googleLoadingSubtitle" style="font-size: 0.85rem; color: var(--text-dim);">Setting up your candidate profile...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE GITHUB OAUTH MODAL (OWN USER ACCOUNT)
+         ========================================== -->
+    <div id="githubModal" class="social-modal-overlay" onclick="handleModalBackdropClick(event, 'githubModal')">
+        <div class="social-modal-card">
+            <button type="button" class="social-modal-close-btn" onclick="closeSocialModal('githubModal')" aria-label="Close dialog">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="social-modal-body">
+                <div id="githubNormalView">
+                    <div class="github-auth-header">
+                        <div class="github-connect-row">
+                            <div class="github-connect-icon">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                            </div>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-dim)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="17 1 21 5 17 9"></polyline>
+                                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                                <polyline points="7 23 3 19 7 15"></polyline>
+                                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                            </svg>
+                            <div class="github-connect-icon" style="border-color: var(--primary);">
+                                <span style="font-weight: 900; font-size: 0.9rem; color: var(--primary);">ES</span>
+                            </div>
+                        </div>
+                        <h3>Authorize with GitHub</h3>
+                        <p>Enter your developer profile to connect with ExamSphere Pro</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); submitCustomOAuth('github');">
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Developer Name</label>
+                            <input type="text" id="githubCustomName" placeholder="Enter your developer name" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <div style="margin-bottom: 18px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">GitHub Username or Email</label>
+                            <input type="email" id="githubCustomEmail" placeholder="yourname@github.com" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <button type="submit" class="btn-github-green" style="width: 100%; padding: 13px; font-size: 0.95rem;">
+                            <span>Authorize with GitHub &rarr;</span>
+                        </button>
+                    </form>
+
+                    <ul class="github-perms-list" style="margin-top: 18px;">
+                        <li class="github-perm-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>Access live code evaluation playground</span>
+                        </li>
+                        <li class="github-perm-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <span>Associate test submissions with verified developer ID</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- In-Flight Loading State -->
+                <div id="githubLoadingState" class="modal-auth-loading">
+                    <div class="auth-spinner" style="border-top-color: #238636;"></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Authorizing Developer Account...</h4>
+                    <p id="githubLoadingSubtitle" style="font-size: 0.85rem; color: var(--text-dim);">Connecting to playground...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE LINKEDIN OAUTH MODAL (OWN USER ACCOUNT)
+         ========================================== -->
+    <div id="linkedinModal" class="social-modal-overlay" onclick="handleModalBackdropClick(event, 'linkedinModal')">
+        <div class="social-modal-card">
+            <button type="button" class="social-modal-close-btn" onclick="closeSocialModal('linkedinModal')" aria-label="Close dialog">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="social-modal-body">
+                <div id="linkedinNormalView">
+                    <div class="linkedin-auth-header">
+                        <svg class="linkedin-logo-svg" viewBox="0 0 24 24" fill="#0A66C2">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76A1.66 1.66 0 0 0 4.8 7.1a1.66 1.66 0 0 0 0 3.32 1.66 1.66 0 0 0 1.66-1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                        </svg>
+                        <h3>Sign In with LinkedIn</h3>
+                        <p>Enter your LinkedIn profile credentials to access your portal</p>
+                    </div>
+
+                    <form onsubmit="event.preventDefault(); submitCustomOAuth('linkedin');">
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">Your Full Name</label>
+                            <input type="text" id="linkedinCustomName" placeholder="Enter your full name" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <div style="margin-bottom: 18px;">
+                            <label style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 5px;">LinkedIn Email Address</label>
+                            <input type="email" id="linkedinCustomEmail" placeholder="your.name@linkedin.com" required style="width: 100%; padding: 11px 14px; border-radius: var(--radius-md); border: 1.5px solid var(--border-color); background: var(--bg-input); color: var(--text-main); font-size: 0.9rem;">
+                        </div>
+                        <button type="submit" class="btn-linkedin-blue" style="width: 100%; padding: 13px; font-size: 0.95rem;">
+                            <span>Continue with LinkedIn &rarr;</span>
+                        </button>
+                    </form>
+
+                    <p style="font-size: 0.74rem; color: var(--text-dim); text-align: center; margin-top: 16px; line-height: 1.4;">
+                        Your verified professional name will be issued on completion certificates.
+                    </p>
+                </div>
+
+                <!-- In-Flight Loading State -->
+                <div id="linkedinLoadingState" class="modal-auth-loading">
+                    <div class="auth-spinner" style="border-top-color: #0A66C2;"></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Authenticating LinkedIn Profile...</h4>
+                    <p id="linkedinLoadingSubtitle" style="font-size: 0.85rem; color: var(--text-dim);">Redirecting to student portal...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         INTERACTIVE LINKEDIN OAUTH MODAL
+         ========================================== -->
+    <div id="linkedinModal" class="social-modal-overlay" onclick="handleModalBackdropClick(event, 'linkedinModal')">
+        <div class="social-modal-card">
+            <button type="button" class="social-modal-close-btn" onclick="closeSocialModal('linkedinModal')" aria-label="Close dialog">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="social-modal-body">
+                <div id="linkedinNormalView">
+                    <div class="linkedin-auth-header">
+                        <svg class="linkedin-logo-svg" viewBox="0 0 24 24" fill="#0A66C2">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76A1.66 1.66 0 0 0 4.8 7.1a1.66 1.66 0 0 0 0 3.32 1.66 1.66 0 0 0 1.66-1.66m1.39 9.74v-8.37H5.07v8.37h2.78z"/>
+                        </svg>
+                        <h3>Sign in with LinkedIn</h3>
+                        <p>Continue to ExamSphere Assessment Platform</p>
+                    </div>
+
+                    <div class="linkedin-user-card">
+                        <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Rohan" alt="Rohan Mehta" class="linkedin-user-avatar">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">Rohan Mehta</div>
+                            <div style="font-size: 0.78rem; color: var(--text-dim); margin-top: 2px;">Candidate Profile &bull; CS 2026</div>
+                            <div style="font-size: 0.76rem; color: var(--primary); font-weight: 600;">rohan.mehta@linkedin.com</div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn-linkedin-blue" onclick="selectSocialAccount('linkedin', 'Rohan Mehta', 'rohan.mehta@linkedin.com', 'https://api.dicebear.com/7.x/bottts/svg?seed=Rohan')">
+                        <span>Continue as Rohan</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+
+                    <div style="text-align: center; margin-top: 14px;">
+                        <a href="javascript:void(0)" onclick="toggleCustomOAuth('linkedin')" style="font-size: 0.78rem; color: var(--primary); font-weight: 600;">Switch to different LinkedIn profile &rarr;</a>
+                    </div>
+
+                    <div id="linkedinCustomForm" class="custom-oauth-form">
+                        <div style="margin-bottom: 10px;">
+                            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">Candidate Name</label>
+                            <input type="text" id="linkedinCustomName" placeholder="e.g. Ananya Sen" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.88rem;">
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 4px;">LinkedIn Email</label>
+                            <input type="email" id="linkedinCustomEmail" placeholder="ananya@linkedin.com" style="width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-size: 0.88rem;">
+                        </div>
+                        <button type="button" class="btn-linkedin-blue" onclick="submitCustomOAuth('linkedin')">
+                            Continue as Custom Candidate &rarr;
+                        </button>
+                    </div>
+
+                    <p style="font-size: 0.74rem; color: var(--text-dim); text-align: center; margin-top: 16px; line-height: 1.4;">
+                        By clicking Continue, you agree to LinkedIn's User Agreement and Privacy Policy.
+                    </p>
+                </div>
+
+                <!-- In-Flight Loading State -->
+                <div id="linkedinLoadingState" class="modal-auth-loading">
+                    <div class="auth-spinner" style="border-top-color: #0A66C2;"></div>
+                    <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px;">Authenticating LinkedIn Session...</h4>
+                    <p id="linkedinLoadingSubtitle" style="font-size: 0.85rem; color: var(--text-dim);">Redirecting to student portal...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        function openSocialModal(provider) {
+            const modalId = provider === 'google' ? 'googleModal' : provider === 'github' ? 'githubModal' : 'linkedinModal';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeSocialModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function handleModalBackdropClick(e, modalId) {
+            if (e.target.id === modalId) {
+                closeSocialModal(modalId);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSocialModal('googleModal');
+                closeSocialModal('githubModal');
+                closeSocialModal('linkedinModal');
+            }
+        });
+
+        function toggleCustomOAuth(type) {
+            const formId = `${type}CustomForm`;
+            const form = document.getElementById(formId);
+            if (!form) return;
+            form.style.display = form.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function selectSocialAccount(provider, name, email, avatar) {
+            const normalView = document.getElementById(`${provider}NormalView`);
+            const loadingState = document.getElementById(`${provider}LoadingState`);
+            const subTitle = document.getElementById(`${provider}LoadingSubtitle`);
+
+            if (normalView) normalView.style.display = 'none';
+            if (loadingState) loadingState.classList.add('active');
+            if (subTitle) subTitle.textContent = `Signing in as ${name}... Launching Student Portal...`;
+
+            setTimeout(() => {
+                const studentUser = {
+                    id: Date.now(),
+                    name: name,
+                    email: email,
+                    avatar: avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`,
+                    role: "student"
+                };
+
+                // Save in session and mock DB
+                localStorage.setItem("user", JSON.stringify(studentUser));
+                localStorage.setItem("role", "student");
+
+                const users = JSON.parse(localStorage.getItem("es_users") || "[]");
+                const idx = users.findIndex(u => u.email === studentUser.email);
+                if (idx >= 0) {
+                    users[idx] = { ...users[idx], ...studentUser };
+                } else {
+                    users.push(studentUser);
+                }
+                localStorage.setItem("es_users", JSON.stringify(users));
+
+                window.location.href = "student.html";
+            }, 550);
+        }
+
+        function submitCustomOAuth(provider) {
+            const nameInput = document.getElementById(`${provider}CustomName`);
+            const emailInput = document.getElementById(`${provider}CustomEmail`);
+
+            const name = (nameInput?.value || "").trim() || (provider === 'google' ? 'Google Candidate' : provider === 'github' ? 'GitHub Developer' : 'LinkedIn Member');
+            const email = (emailInput?.value || "").trim() || `candidate.${provider}@examsphere.com`;
+            const avatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+
+            selectSocialAccount(provider, name, email, avatar);
+        }
+    </script>
+
+</body>
+
+</html>

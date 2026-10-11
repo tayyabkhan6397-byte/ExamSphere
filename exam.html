@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Live Examination | ExamSphere Pro</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="exam-body">
+
+<!-- TOPBAR -->
+<header class="exam-topbar">
+
+    <div class="logo">EXAM<span>SPHERE</span></div>
+
+    <div class="exam-header-center">
+        <span class="subject-pill" id="examSubjectLabel">SUBJECT</span>
+        <b id="examTitle" class="exam-header-title">Online Examination</b>
+    </div>
+
+    <div class="exam-topbar-controls">
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span>Theme</span>
+        </button>
+        <button class="btn-fullscreen" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+            <span>Fullscreen</span>
+        </button>
+
+        <div class="exam-timer" id="timerBadge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="timer">--:--</span>
+        </div>
+    </div>
+
+</header>
+
+
+<!-- MAIN EXAM LAYOUT -->
+<main class="exam-layout">
+
+    <!-- LEFT: QUESTION AREA -->
+    <section class="question-area">
+
+        <div class="question-header">
+            <div>
+                <span id="questionPosition" class="q-pos-badge">QUESTION 1 OF 1</span>
+                <h2 id="examSubjectHeading" class="exam-title-sub">Exam</h2>
+            </div>
+            <div class="question-mark-info">
+                <span class="badge-positive" id="questionMarksBadge">+1 Mark</span>
+            </div>
+        </div>
+
+        <!-- DYNAMIC QUESTION CONTENT CARD -->
+        <div class="question-card" id="questionCard">
+            <div class="loading-spinner">
+                <p>Loading examination questions...</p>
+            </div>
+        </div>
+
+        <!-- QUESTION ACTIONS (REVIEW & CLEAR) -->
+        <div class="question-tool-actions">
+            <button class="btn-tool flag-btn" id="flagBtn" onclick="toggleMarkForReview()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                    <line x1="4" y1="22" x2="4" y2="15"></line>
+                </svg>
+                <span>Mark for Review</span>
+            </button>
+            <button class="btn-tool clear-btn" onclick="clearAnswer()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                <span>Clear Selection</span>
+            </button>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="question-navigation">
+            <button class="nav-question" id="prevBtn" onclick="goPrevious()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                <span>Previous</span>
+            </button>
+
+            <div class="q-numbers" id="qNumbers"></div>
+
+            <button class="nav-question primary-nav" id="nextBtn" onclick="goNext()">
+                <span>Save & Next</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT: EXAM SIDEBAR & PALETTE -->
+    <aside class="exam-sidebar">
+
+        <div class="exam-summary">
+            <span>EXAM PROGRESS</span>
+            <div class="exam-progress-circle">
+                <b id="progressPct">0%</b>
+            </div>
+            <p id="progressText">0 of 0 answered</p>
+        </div>
+
+        <div class="palette">
+            <div class="palette-head">
+                <h3>Question Palette</h3>
+            </div>
+
+            <div class="palette-grid" id="paletteGrid"></div>
+
+            <div class="legend-box">
+                <div class="legend-item"><span class="legend-dot answered"></span> Answered</div>
+                <div class="legend-item"><span class="legend-dot unattempted"></span> Not Answered</div>
+                <div class="legend-item"><span class="legend-dot current"></span> Current Question</div>
+                <div class="legend-item"><span class="legend-dot flagged"></span> Marked for Review</div>
+                <div class="legend-item"><span class="legend-dot answered-flagged"></span> Answered & Review</div>
+            </div>
+        </div>
+
+        <button class="submit-exam" onclick="openSubmitModal()">
+            <span>Submit Examination</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </button>
+
+    </aside>
+
+</main>
+
+
+<!-- SUBMISSION CONFIRMATION MODAL -->
+<div id="submitConfirmModal" class="modal">
+    <div class="modal-box confirm-modal-box">
+        <button class="close" onclick="closeSubmitModal()">&times;</button>
+
+        <div class="confirm-modal-header">
+            <div class="modal-icon-badge">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+            </div>
+            <h2>Submit Examination?</h2>
+            <p class="text-muted">Review your attempt summary before final submission.</p>
+        </div>
+
+        <div class="summary-stat-grid">
+            <div class="summary-box">
+                <small>Total Questions</small>
+                <b id="modalTotalQ">0</b>
+            </div>
+            <div class="summary-box green">
+                <small>Answered</small>
+                <b id="modalAnsweredQ">0</b>
+            </div>
+            <div class="summary-box orange">
+                <small>Unanswered</small>
+                <b id="modalUnansweredQ">0</b>
+            </div>
+            <div class="summary-box purple">
+                <small>Marked for Review</small>
+                <b id="modalFlaggedQ">0</b>
+            </div>
+        </div>
+
+        <div class="confirm-modal-actions">
+            <button class="btn secondary" onclick="closeSubmitModal()">
+                &larr; Continue Test
+            </button>
+            <button class="gradient-btn" onclick="confirmFinalSubmit()">
+                Confirm & Submit Test &rarr;
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- PROCTORING TAB-SWITCH WARNING MODAL -->
+<div id="proctorWarningModal" class="modal">
+    <div class="modal-box proctor-alert-box">
+        <div class="proctor-icon-circle">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+        </div>
+        <h2 style="font-size: 1.35rem; font-weight: 800; color: var(--red); margin-bottom: 6px;">Security Warning: Tab Switch Detected!</h2>
+        <div class="strike-counter" id="strikeCounter">Warning 1 of 3</div>
+        <p class="text-muted" style="font-size: 0.9rem; line-height: 1.5; margin: 12px 0 22px;">
+            Navigating away from the active examination window is strictly prohibited. If you switch tabs or leave this window <b>3 times</b>, your examination will be <b>automatically submitted</b> immediately.
+        </p>
+        <button class="gradient-btn" onclick="dismissProctorWarning()" style="margin: 0 auto;">
+            I Understand & Return to Test
+        </button>
+    </div>
+</div>
+
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/exam.js"></script>
+
+</body>
+</html>

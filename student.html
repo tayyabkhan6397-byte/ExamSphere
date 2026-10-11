@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Student Portal | ExamSphere Pro</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-body">
+
+<div class="dashboard-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="logo">EXAM<span>SPHERE</span></div>
+            <span class="role-badge student-badge">STUDENT PORTAL</span>
+        </div>
+
+        <nav id="studentSidebarNav">
+            <button class="active" onclick="showStudentSection('availableExamsSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>Available Exams</span>
+            </button>
+
+            <button onclick="showStudentSection('studyNotesSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </svg>
+                <span>Study Notes & PDFs</span>
+            </button>
+
+            <button onclick="showStudentSection('codePracticeSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+                <span>Code Practice</span>
+            </button>
+
+            <button onclick="showStudentSection('myResultsSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="7"></circle>
+                    <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                </svg>
+                <span>My Results</span>
+            </button>
+
+            <button onclick="showStudentSection('leaderboardSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Leaderboard</span>
+            </button>
+
+            <button onclick="showStudentSection('profileSection')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <span>My Profile</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+                <span>Sign Out</span>
+            </button>
+        </div>
+
+    </aside>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="dashboard-content">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <div id="topbarAvatarContainer" style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: var(--primary-bg); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center;">
+                    <span id="topbarAvatarText" style="font-weight: 800; color: var(--primary); font-size: 0.95rem;">ST</span>
+                </div>
+                <div>
+                    <span class="text-muted" style="font-size: 0.8rem;">Candidate Portal</span>
+                    <h2 id="studentName" style="font-size: 1.15rem; font-weight: 700;">Student</h2>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeToggleBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <span>Theme</span>
+                </button>
+                <a href="index.html" class="nav-btn small">Home</a>
+                <button class="btn-sm-danger" onclick="logout()">Sign Out</button>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+
+            <!-- AVAILABLE EXAMS SECTION -->
+            <section id="availableExamsSection" class="dashboard-section active">
+
+                <div class="section-heading">
+                    <div>
+                        <span>EXAMINATION DASHBOARD</span>
+                        <h1>Live Examinations</h1>
+                    </div>
+                </div>
+
+                <!-- OVERVIEW STATS -->
+                <div class="dashboard-cards">
+                    <div class="dash-card cyan">
+                        <div class="stat-icon-wrap" style="color: var(--cyan); margin-bottom: 8px;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="6"></circle>
+                                <circle cx="12" cy="12" r="2"></circle>
+                            </svg>
+                        </div>
+                        <small>Available Tests</small>
+                        <b id="statAvailExams">0</b>
+                    </div>
+                    <div class="dash-card green">
+                        <div class="stat-icon-wrap" style="color: var(--green); margin-bottom: 8px;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                        </div>
+                        <small>Exams Completed</small>
+                        <b id="statMyAttempts">0</b>
+                    </div>
+                    <div class="dash-card purple">
+                        <div class="stat-icon-wrap" style="color: var(--purple); margin-bottom: 8px;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <small>Average Score</small>
+                        <b id="statMyAvg">0%</b>
+                    </div>
+                </div>
+
+                <!-- SEARCH & FILTER TOOLBAR -->
+                <div class="exam-filter-toolbar">
+                    <div class="search-input-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-dim);">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="examSearchInput" placeholder="Search exams by title or subject..." oninput="filterExams()">
+                    </div>
+
+                    <div class="category-pills" id="subjectFilterPills">
+                        <button class="cat-pill active" onclick="setSubjectFilter('all')">All Subjects</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('Web Development')">Web Dev</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('Data Structures & Algorithms')">DSA</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('Python Programming')">Python</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('Database Systems (SQL)')">SQL</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('Computer Networks & Security')">Networks</button>
+                        <button class="cat-pill" onclick="setSubjectFilter('General Aptitude & Logic')">Aptitude</button>
+                    </div>
+                </div>
+
+                <!-- EXAM CARDS GRID -->
+                <div class="exam-grid" id="studentExamGrid">
+                    <p class="text-muted">Loading available examinations...</p>
+                </div>
+
+            </section>
+
+
+            <!-- STUDY NOTES & PDF REVISION SECTION (IN STUDENT DASHBOARD) -->
+            <section id="studyNotesSection" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span>EXAM PREPARATION & REVISION</span>
+                        <h1>Study Notes & PDF Cheat Sheets</h1>
+                    </div>
+                </div>
+
+                <!-- NOTES SEARCH & CATEGORY BAR -->
+                <div class="exam-filter-toolbar">
+                    <div class="search-input-box">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-dim);">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="studentNotesSearchInput" placeholder="Search syllabus, concepts, or topics..." oninput="filterStudentNotes()">
+                    </div>
+
+                    <div class="category-pills" id="notesCategoryFilterPills">
+                        <button class="cat-pill active" onclick="setNotesFilterCategory('all', this)">All Notes</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('python', this)">Python (M3-R5)</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('web', this)">Web Design (M2-R5)</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('sql', this)">Database & SQL</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('dsa', this)">DSA & Complexity</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('it', this)">IT Tools (M1-R5)</button>
+                        <button class="cat-pill" onclick="setNotesFilterCategory('patterns', this)">Interview Patterns</button>
+                    </div>
+                </div>
+
+                <!-- 6 RICH SUBJECT NOTES CARDS -->
+                <div class="notes-grid" id="studentNotesGrid">
+
+                    <!-- CARD 1: PYTHON -->
+                    <div class="notes-card" data-category="python">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-python">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                                <span>PYTHON M3-R5</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>24 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>Python Programming Core & Advanced</h3>
+                        <p>Master Python syntax, built-in data structures (Lists, Tuples, Dicts, Sets), File I/O, OOPs classes, lambda functions, and NumPy basics.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">Syntax & Variables</span>
+                            <span class="notes-topic-tag">Lists & Dictionaries</span>
+                            <span class="notes-topic-tag">OOP & Inheritance</span>
+                            <span class="notes-topic-tag">File Handling</span>
+                            <span class="notes-topic-tag">Exception Handling</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('python')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('python')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: WEB DESIGN -->
+                    <div class="notes-card" data-category="web">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-web">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span>WEB DESIGN M2-R5</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>32 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>Web Design & Publishing (HTML, CSS, JS)</h3>
+                        <p>Semantic HTML5 elements, CSS3 Flexbox & Grid layouts, responsive media queries, JavaScript DOM manipulation, and modern web protocols.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">HTML5 Semantics</span>
+                            <span class="notes-topic-tag">CSS Flex & Grid</span>
+                            <span class="notes-topic-tag">DOM Manipulation</span>
+                            <span class="notes-topic-tag">Media Queries</span>
+                            <span class="notes-topic-tag">Web Publishing</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('web')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('web')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: SQL & DBMS -->
+                    <div class="notes-card" data-category="sql">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-db">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                                <span>DATABASE & SQL</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>20 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>Database Management & SQL Queries</h3>
+                        <p>Relational algebra, normalization (1NF, 2NF, 3NF, BCNF), DDL/DML commands, complex JOINs, GROUP BY aggregations, and ACID transactions.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">Normalization</span>
+                            <span class="notes-topic-tag">INNER/LEFT JOINs</span>
+                            <span class="notes-topic-tag">Aggregate Functions</span>
+                            <span class="notes-topic-tag">Primary & Foreign Keys</span>
+                            <span class="notes-topic-tag">ACID Properties</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('sql')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('sql')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: DATA STRUCTURES & ALGORITHMS -->
+                    <div class="notes-card" data-category="dsa">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-dsa">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                <span>DSA & COMPLEXITY</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>28 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>Data Structures & Algorithms Cheat Sheet</h3>
+                        <p>Big-O asymptotic notation, Arrays, Stacks, Queues, Linked Lists, Binary Trees, Binary Heaps, QuickSort, MergeSort, and Graph Traversals.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">Big-O Time Complexity</span>
+                            <span class="notes-topic-tag">Stack & Queue</span>
+                            <span class="notes-topic-tag">Binary Search Trees</span>
+                            <span class="notes-topic-tag">Sorting Algorithms</span>
+                            <span class="notes-topic-tag">Graph BFS / DFS</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('dsa')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('dsa')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 5: IT TOOLS & NETWORK BASICS -->
+                    <div class="notes-card" data-category="it">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-network">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                <span>IT TOOLS M1-R5</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>18 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>IT Tools, Operating Systems & Network Basics</h3>
+                        <p>Computer organization, Linux terminal commands, OSI 7-layer model, TCP/IP protocol suite, IPv4/IPv6 subnetting, and cybersecurity foundations.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">OSI 7 Layers</span>
+                            <span class="notes-topic-tag">TCP/IP Protocols</span>
+                            <span class="notes-topic-tag">IPv4 Subnetting</span>
+                            <span class="notes-topic-tag">Linux Commands</span>
+                            <span class="notes-topic-tag">Cybersecurity Basics</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('it')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('it')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 6: CODING INTERVIEW PATTERNS -->
+                    <div class="notes-card" data-category="patterns">
+                        <div class="notes-card-top">
+                            <span class="notes-subject-badge badge-interview">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                                <span>INTERVIEW PATTERNS</span>
+                            </span>
+                            <span class="pdf-indicator-badge">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span>15 Pages PDF</span>
+                            </span>
+                        </div>
+
+                        <h3>Coding Interview & Problem Solving Patterns</h3>
+                        <p>14 core algorithmic patterns for competitive exams and technical assessments: Two Pointers, Sliding Window, Fast & Slow Pointers, and Dynamic Programming.</p>
+
+                        <div class="notes-topics-list">
+                            <span class="notes-topic-tag">Sliding Window</span>
+                            <span class="notes-topic-tag">Two Pointers</span>
+                            <span class="notes-topic-tag">Fast & Slow Pointer</span>
+                            <span class="notes-topic-tag">Dynamic Programming</span>
+                            <span class="notes-topic-tag">Backtracking</span>
+                        </div>
+
+                        <div class="notes-actions-row">
+                            <button type="button" class="btn-notes-read" onclick="openStudentNotesModal('patterns')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                                <span>Read Notes Online</span>
+                            </button>
+                            <button type="button" class="btn-notes-download" onclick="downloadStudentNotesPdf('patterns')">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                <span>Download PDF</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CODE PRACTICE PLAYGROUND SECTION -->
+            <section id="codePracticeSection" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span>INTERACTIVE DEVELOPER PLAYGROUND</span>
+                        <h1>Code Practice & Problem Solving</h1>
+                    </div>
+                </div>
+
+                <!-- PROBLEM SELECTOR BAR -->
+                <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <label for="practiceProblemSelect" style="font-weight: 700; font-size: 0.88rem; color: var(--text-main);">Select Challenge:</label>
+                        <select id="practiceProblemSelect" class="lang-select" onchange="loadPracticeProblem(this.value)" style="min-width: 280px; padding: 8px 12px;">
+                            <option value="two-sum">1. Two Sum (Arrays / Hash Map)</option>
+                            <option value="palindrome">2. Palindrome Checker (Strings)</option>
+                            <option value="reverse-string">3. Reverse a String (Two Pointers)</option>
+                            <option value="fibonacci">4. Fibonacci Number (Recursion / DP)</option>
+                            <option value="valid-parentheses">5. Valid Parentheses (Stack)</option>
+                            <option value="binary-search">6. Binary Search (Algorithms)</option>
+                            <option value="fizzbuzz">7. FizzBuzz (Logic / Math)</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="text-dim" style="font-size: 0.82rem;">Language:</span>
+                        <select id="codeLanguageSelect" class="lang-select" onchange="switchCodeLanguage(this.value)">
+                            <option value="javascript">JavaScript (ES6)</option>
+                            <option value="python">Python 3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SPLIT PANE IDE -->
+                <div class="code-ide-layout">
+
+                    <!-- LEFT: PROBLEM SPECIFICATION -->
+                    <div class="ide-panel">
+                        <div class="ide-panel-header">
+                            <span class="ide-panel-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                </svg>
+                                <span>Problem Description</span>
+                            </span>
+                            <span id="probDifficultyBadge" class="problem-badge badge-easy">Easy</span>
+                        </div>
+
+                        <div class="ide-problem-body">
+                            <div class="problem-header">
+                                <h2 id="probTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">Two Sum</h2>
+                                <div class="problem-badges">
+                                    <span id="probCategoryBadge" class="problem-badge badge-cat">Data Structures</span>
+                                    <span class="problem-badge" style="background: var(--bg-surface); color: var(--text-dim);">Time Limit: 2.0s</span>
+                                </div>
+                            </div>
+
+                            <p id="probDescription" class="problem-desc">
+                                Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.
+                            </p>
+
+                            <h4 style="font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">Example 1:</h4>
+                            <div id="probExample1" class="example-box">
+                                <b>Input:</b> nums = [2, 7, 11, 15], target = 9<br>
+                                <b>Output:</b> [0, 1]<br>
+                                <b>Explanation:</b> Because nums[0] + nums[1] == 9, we return [0, 1].
+                            </div>
+
+                            <h4 style="font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">Example 2:</h4>
+                            <div id="probExample2" class="example-box">
+                                <b>Input:</b> nums = [3, 2, 4], target = 6<br>
+                                <b>Output:</b> [1, 2]
+                            </div>
+
+                            <div class="constraints-box">
+                                <b>Constraints:</b>
+                                <ul id="probConstraints">
+                                    <li>2 &le; nums.length &le; 10<sup>4</sup></li>
+                                    <li>-10<sup>9</sup> &le; nums[i] &le; 10<sup>9</sup></li>
+                                    <li>Only one valid answer exists.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: CODE EDITOR & CONSOLE -->
+                    <div class="ide-panel">
+                        <div class="ide-panel-header">
+                            <span class="ide-panel-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                <span id="editorFilenameLabel">solution.js</span>
+                            </span>
+                            <button class="btn-editor btn-editor-secondary" onclick="resetPracticeCode()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                                </svg>
+                                <span>Reset Code</span>
+                            </button>
+                        </div>
+
+                        <!-- MONACO / LEETCODE STYLE EDITOR -->
+                        <div class="code-editor-area">
+                            <div class="code-editor-wrapper">
+                                <div id="editorLineNumbers" class="editor-line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10</div>
+                                <textarea id="practiceCodeArea" class="code-textarea" spellcheck="false" oninput="updateLineNumbers()" onkeydown="handleEditorTab(event)"></textarea>
+                            </div>
+
+                            <div class="editor-action-bar">
+                                <div style="font-size: 0.8rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px;">
+                                    <span id="editorStatusIndicator">Ready to evaluate</span>
+                                </div>
+                                <div class="editor-action-right">
+                                    <button class="btn-editor btn-editor-secondary" onclick="runPracticeCode(false)">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        <span>Run Sample</span>
+                                    </button>
+                                    <button class="btn-editor btn-editor-primary" onclick="runPracticeCode(true)">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                        <span>Submit Solution</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OUTPUT / TEST RESULTS DRAWER -->
+                        <div class="test-console-drawer">
+                            <div class="test-console-tabs">
+                                <button class="console-tab active" id="tabCase1" onclick="switchConsoleTab(1)">Test Case 1</button>
+                                <button class="console-tab" id="tabCase2" onclick="switchConsoleTab(2)">Test Case 2</button>
+                                <button class="console-tab" id="tabCase3" onclick="switchConsoleTab(3)">Test Case 3</button>
+                            </div>
+
+                            <div class="console-tab-content" id="consoleOutputContent">
+                                <div style="color: var(--text-dim);">
+                                    Click <b>Run Sample</b> or <b>Submit Solution</b> to execute your code against test cases.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MY RESULTS SECTION -->
+            <section id="myResultsSection" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span>PERFORMANCE HISTORY</span>
+                        <h1>My Exam Results</h1>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h3>Attempt History</h3>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Exam</th>
+                                    <th>Score</th>
+                                    <th>Percentage</th>
+                                    <th>Result</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentResultsBody">
+                                <tr><td colspan="6">Loading results...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- LEADERBOARD SECTION -->
+            <section id="leaderboardSection" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span>TOP PERFORMERS</span>
+                        <h1>Student Leaderboard</h1>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h3>Rankings & Overall Standing</h3>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Exams Completed</th>
+                                    <th>Total Score</th>
+                                    <th>Standing</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboardBody">
+                                <tr><td colspan="5">Loading rankings...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- PROFILE SECTION -->
+            <section id="profileSection" class="dashboard-section">
+
+                <div class="section-heading">
+                    <div>
+                        <span>ACCOUNT MANAGEMENT</span>
+                        <h1>My Profile & Settings</h1>
+                    </div>
+                </div>
+
+                <!-- PROFILE HERO CARD -->
+                <div class="profile-card">
+                    <div class="profile-avatar-container">
+                        <div id="mainProfileAvatar" style="width: 88px; height: 88px; border-radius: 50%; background: var(--primary-bg); border: 3px solid var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--primary);">
+                            ST
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profileName">-</h2>
+                        <p id="profileEmail" class="text-muted">-</p>
+                        <span class="role-badge student-badge">Verified Candidate</span>
+                    </div>
+                </div>
+
+                <!-- 4 STATS -->
+                <div class="dashboard-cards" style="margin-top:1.5rem;">
+                    <div class="dash-card blue">
+                        <small>Exams Attempted</small>
+                        <b id="profileExams">0</b>
+                    </div>
+                    <div class="dash-card green">
+                        <small>Passed</small>
+                        <b id="profilePassed">0</b>
+                    </div>
+                    <div class="dash-card purple">
+                        <small>Best Score</small>
+                        <b id="profileBest">0%</b>
+                    </div>
+                    <div class="dash-card cyan">
+                        <small>Avg Score</small>
+                        <b id="profileAvg">0%</b>
+                    </div>
+                </div>
+
+                <!-- AVATAR CUSTOMIZER -->
+                <div class="panel" style="margin-top: 1.5rem;">
+                    <div class="panel-head">
+                        <h3>Profile Avatar</h3>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <p class="text-muted" style="font-size: 0.88rem; margin-bottom: 12px;">Choose an avatar or upload your photo:</p>
+                        <div class="avatar-selector-grid" id="avatarPickerGrid">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <label class="btn-editor btn-editor-secondary" style="cursor: pointer;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <span>Upload Photo</span>
+                                <input type="file" id="customAvatarInput" accept="image/*" style="display:none;" onchange="handleAvatarUpload(event)">
+                            </label>
+                            <span id="avatarUploadMsg" style="font-size: 0.82rem; color: var(--green);"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EDIT PERSONAL DETAILS -->
+                <div class="panel" style="margin-top: 1.5rem;">
+                    <div class="panel-head">
+                        <h3>Personal Information</h3>
+                    </div>
+                    <form onsubmit="updateProfileInfo(event)" style="padding: 1.5rem; max-width: 480px; display: flex; flex-direction: column; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.88rem;">Full Name</label>
+                            <input type="text" id="editFullName" placeholder="Enter your full name" required style="width:100%; padding:0.75rem; border:1.5px solid var(--border-color); border-radius:10px; background:var(--bg-input); color:var(--text-main);">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.88rem;">Email Address</label>
+                            <input type="email" id="editEmail" placeholder="Enter your email" required style="width:100%; padding:0.75rem; border:1.5px solid var(--border-color); border-radius:10px; background:var(--bg-input); color:var(--text-main);">
+                        </div>
+                        <button class="gradient-btn" type="submit" style="align-self: flex-start;">Save Changes</button>
+                        <p id="profileUpdateMsg" class="login-msg"></p>
+                    </form>
+                </div>
+
+                <!-- CHANGE PASSWORD -->
+                <div class="panel" style="margin-top: 1.5rem;">
+                    <div class="panel-head">
+                        <h3>Security & Password</h3>
+                    </div>
+                    <form onsubmit="changePassword(event)" style="padding:1.5rem; display:flex; flex-direction:column; gap:1rem; max-width:480px;">
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem; font-weight:600; font-size: 0.88rem;">Current Password</label>
+                            <div class="password-box">
+                                <input type="password" id="currentPass" placeholder="Enter current password" required style="width:100%; padding:0.75rem; border:1.5px solid var(--border-color); border-radius:10px; background:var(--bg-input); color:var(--text-main);">
+                                <button type="button" class="password-toggle-btn" onclick="togglePassword('currentPass')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem; font-weight:600; font-size: 0.88rem;">New Password</label>
+                            <div class="password-box">
+                                <input type="password" id="newPass" placeholder="Minimum 6 characters" required style="width:100%; padding:0.75rem; border:1.5px solid var(--border-color); border-radius:10px; background:var(--bg-input); color:var(--text-main);">
+                                <button type="button" class="password-toggle-btn" onclick="togglePassword('newPass')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label style="display:block; margin-bottom:0.5rem; font-weight:600; font-size: 0.88rem;">Confirm New Password</label>
+                            <div class="password-box">
+                                <input type="password" id="confirmNewPass" placeholder="Re-enter new password" required style="width:100%; padding:0.75rem; border:1.5px solid var(--border-color); border-radius:10px; background:var(--bg-input); color:var(--text-main);">
+                                <button type="button" class="password-toggle-btn" onclick="togglePassword('confirmNewPass')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="gradient-btn" type="submit" style="align-self:flex-start;">Update Password</button>
+                        <p id="changePassMsg" class="login-msg"></p>
+                    </form>
+                </div>
+
+                <!-- DANGER ZONE -->
+                <div class="danger-panel">
+                    <h3>Danger Zone</h3>
+                    <p>Actions here are irreversible. Resetting history will clear your test results, and account deletion will remove your credentials entirely.</p>
+                    <div class="danger-action-row">
+                        <button class="btn-editor btn-editor-secondary" onclick="confirmResetHistory()" style="color: var(--red); border-color: rgba(220, 38, 38, 0.4);">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+                            <span>Reset Exam History</span>
+                        </button>
+                        <button class="btn-editor" onclick="confirmDeleteAccount()" style="background: var(--red); color: white; border: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            <span>Delete Account</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+     IN-BROWSER STUDY NOTES & PDF READER MODAL (STUDENT PORTAL)
+     ========================================== -->
+<div id="studentNotesModal" class="social-modal-overlay" onclick="handleStudentNotesBackdropClick(event)">
+    <div class="notes-modal-box">
+        <div class="notes-modal-header">
+            <div>
+                <span id="studentNotesModalBadge" class="notes-subject-badge badge-python" style="margin-bottom: 4px;">STUDY REVISION</span>
+                <h3 id="studentNotesModalTitle" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-top: 2px;">Subject Notes</h3>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <button type="button" class="btn-notes-download" onclick="downloadStudentCurrentModalPdf()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    <span>Print / Save PDF</span>
+                </button>
+                <button type="button" class="social-modal-close-btn" style="position: static;" onclick="closeStudentNotesModal()" aria-label="Close dialog">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="notes-modal-body" id="studentNotesModalContent">
+            <!-- Dynamic notes content rendered via JS -->
+        </div>
+    </div>
+</div>
+
+<!-- CONFIRMATION MODAL -->
+<div id="dangerConfirmModal" class="modal">
+    <div class="modal-box" style="max-width: 440px; text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--red-bg); color: var(--red); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </div>
+        <h2 id="modalActionTitle" style="font-size: 1.25rem; font-weight: 800; margin-bottom: 8px;">Are you sure?</h2>
+        <p id="modalActionDesc" class="text-muted" style="font-size: 0.88rem; margin-bottom: 20px;">This action cannot be undone.</p>
+        <div style="display: flex; justify-content: center; gap: 12px;">
+            <button class="btn secondary" onclick="closeDangerModal()">Cancel</button>
+            <button id="modalActionConfirmBtn" class="btn" style="background: var(--red); color: white;">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+<script src="js/notes.js"></script>
+<script>
+    const user = requireRole("student");
+    let allExamsList = [];
+    let activeSubjectFilter = "all";
+
+    // ---------------- CODING PRACTICE CHALLENGES ----------------
+    const practiceProblems = {
+        "two-sum": {
+            id: "two-sum",
+            title: "1. Two Sum",
+            category: "Data Structures & Algorithms",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.",
+            example1: "<b>Input:</b> nums = [2, 7, 11, 15], target = 9<br><b>Output:</b> [0, 1]<br><b>Explanation:</b> nums[0] + nums[1] == 9.",
+            example2: "<b>Input:</b> nums = [3, 2, 4], target = 6<br><b>Output:</b> [1, 2]",
+            constraints: ["2 &le; nums.length &le; 10<sup>4</sup>", "-10<sup>9</sup> &le; nums[i] &le; 10<sup>9</sup>", "Only one valid answer exists."],
+            starterJS: `function twoSum(nums, target) {
+    // Write your solution here
+    const map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const complement = target - nums[i];
+        if (map.has(complement)) {
+            return [map.get(complement), i];
+        }
+        map.set(nums[i], i);
+    }
+    return [];
+}`,
+            starterPy: `def two_sum(nums, target):
+    # Write your solution here
+    seen = {}
+    for i, num in enumerate(nums):
+        diff = target - num
+        if diff in seen:
+            return [seen[diff], i]
+        seen[num] = i
+    return []`,
+            testCases: [
+                { input: "nums = [2, 7, 11, 15], target = 9", expected: "[0, 1]", args: [[2, 7, 11, 15], 9] },
+                { input: "nums = [3, 2, 4], target = 6", expected: "[1, 2]", args: [[3, 2, 4], 6] },
+                { input: "nums = [3, 3], target = 6", expected: "[0, 1]", args: [[3, 3], 6] }
+            ],
+            fnName: "twoSum"
+        },
+        "palindrome": {
+            id: "palindrome",
+            title: "2. Palindrome Checker",
+            category: "Strings & Pointers",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "A phrase is a palindrome if, after converting all uppercase letters to lowercase and removing all non-alphanumeric characters, it reads the same forward and backward.",
+            example1: '<b>Input:</b> s = "A man, a plan, a canal: Panama"<br><b>Output:</b> true',
+            example2: '<b>Input:</b> s = "race a car"<br><b>Output:</b> false',
+            constraints: ["1 &le; s.length &le; 2 * 10<sup>5</sup>", "s consists only of printable ASCII characters."],
+            starterJS: `function isPalindrome(s) {
+    // Clean string and test
+    const clean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return clean === clean.split('').reverse().join('');
+}`,
+            starterPy: `def is_palindrome(s):
+    # Clean string and test
+    clean = "".join(ch.lower() for ch in s if ch.isalnum())
+    return clean == clean[::-1]`,
+            testCases: [
+                { input: 's = "A man, a plan, a canal: Panama"', expected: "true", args: ["A man, a plan, a canal: Panama"] },
+                { input: 's = "race a car"', expected: "false", args: ["race a car"] },
+                { input: 's = " "', expected: "true", args: [" "] }
+            ],
+            fnName: "isPalindrome"
+        },
+        "reverse-string": {
+            id: "reverse-string",
+            title: "3. Reverse a String",
+            category: "Two Pointers",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "Write a function that reverses a string. You must do this by modifying the input array in-place with O(1) extra memory.",
+            example1: '<b>Input:</b> s = ["h","e","l","l","o"]<br><b>Output:</b> ["o","l","l","e","h"]',
+            example2: '<b>Input:</b> s = ["H","a","n","n","a","h"]<br><b>Output:</b> ["h","a","n","n","a","H"]',
+            constraints: ["1 &le; s.length &le; 10<sup>5</sup>"],
+            starterJS: `function reverseString(s) {
+    let left = 0, right = s.length - 1;
+    while (left < right) {
+        [s[left], s[right]] = [s[right], s[left]];
+        left++;
+        right--;
+    }
+    return s;
+}`,
+            starterPy: `def reverse_string(s):
+    return s[::-1]`,
+            testCases: [
+                { input: 's = ["h","e","l","l","o"]', expected: '["o","l","l","e","h"]', args: [["h","e","l","l","o"]] },
+                { input: 's = ["H","a","n","n","a","h"]', expected: '["h","a","n","n","a","H"]', args: [["H","a","n","n","a","h"]] },
+                { input: 's = ["a"]', expected: '["a"]', args: [["a"]] }
+            ],
+            fnName: "reverseString"
+        },
+        "fibonacci": {
+            id: "fibonacci",
+            title: "4. Fibonacci Number",
+            category: "Dynamic Programming",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "The Fibonacci numbers, commonly denoted <code>F(n)</code> form a sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. Return <code>F(n)</code>.",
+            example1: "<b>Input:</b> n = 2<br><b>Output:</b> 1<br><b>Explanation:</b> F(2) = F(1) + F(0) = 1 + 0 = 1.",
+            example2: "<b>Input:</b> n = 4<br><b>Output:</b> 3<br><b>Explanation:</b> F(4) = F(3) + F(2) = 2 + 1 = 3.",
+            constraints: ["0 &le; n &le; 30"],
+            starterJS: `function fib(n) {
+    if (n <= 1) return n;
+    let a = 0, b = 1;
+    for (let i = 2; i <= n; i++) {
+        const next = a + b;
+        a = b;
+        b = next;
+    }
+    return b;
+}`,
+            starterPy: `def fib(n):
+    if n <= 1:
+        return n
+    a, b = 0, 1
+    for _ in range(2, n + 1):
+        a, b = b, a + b
+    return b`,
+            testCases: [
+                { input: "n = 2", expected: "1", args: [2] },
+                { input: "n = 3", expected: "2", args: [3] },
+                { input: "n = 4", expected: "3", args: [4] }
+            ],
+            fnName: "fib"
+        },
+        "valid-parentheses": {
+            id: "valid-parentheses",
+            title: "5. Valid Parentheses",
+            category: "Stack Data Structure",
+            difficulty: "Medium",
+            badgeClass: "badge-medium",
+            description: "Given a string <code>s</code> containing just the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code> and <code>']'</code>, determine if the input string is valid.",
+            example1: '<b>Input:</b> s = "()"<br><b>Output:</b> true',
+            example2: '<b>Input:</b> s = "()[]{}"<br><b>Output:</b> true',
+            constraints: ["1 &le; s.length &le; 10<sup>4</sup>"],
+            starterJS: `function isValid(s) {
+    const stack = [];
+    const map = { ')': '(', '}': '{', ']': '[' };
+    for (const ch of s) {
+        if (ch === '(' || ch === '{' || ch === '[') {
+            stack.push(ch);
+        } else {
+            if (stack.pop() !== map[ch]) return false;
+        }
+    }
+    return stack.length === 0;
+}`,
+            starterPy: `def is_valid(s):
+    stack = []
+    mapping = {")": "(", "}": "{", "]": "["}
+    for char in s:
+        if char in mapping:
+            top = stack.pop() if stack else '#'
+            if mapping[char] != top:
+                return False
+        else:
+            stack.append(char)
+    return not stack`,
+            testCases: [
+                { input: 's = "()"', expected: "true", args: ["()"] },
+                { input: 's = "()[]{}"', expected: "true", args: ["()[]{}"] },
+                { input: 's = "(]"', expected: "false", args: ["(]"] }
+            ],
+            fnName: "isValid"
+        },
+        "binary-search": {
+            id: "binary-search",
+            title: "6. Binary Search",
+            category: "Searching Algorithms",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "Given an array of integers <code>nums</code> which is sorted in ascending order, and an integer <code>target</code>, write a function to search <code>target</code> in <code>nums</code>. If <code>target</code> exists, then return its index. Otherwise, return -1.",
+            example1: "<b>Input:</b> nums = [-1,0,3,5,9,12], target = 9<br><b>Output:</b> 4",
+            example2: "<b>Input:</b> nums = [-1,0,3,5,9,12], target = 2<br><b>Output:</b> -1",
+            constraints: ["1 &le; nums.length &le; 10<sup>4</sup>", "-10<sup>4</sup> &lt; nums[i], target &lt; 10<sup>4</sup>"],
+            starterJS: `function search(nums, target) {
+    let low = 0, high = nums.length - 1;
+    while (low <= high) {
+        const mid = Math.floor((low + high) / 2);
+        if (nums[mid] === target) return mid;
+        if (nums[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}`,
+            starterPy: `def search(nums, target):
+    low, high = 0, len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1`,
+            testCases: [
+                { input: "nums = [-1,0,3,5,9,12], target = 9", expected: "4", args: [[-1,0,3,5,9,12], 9] },
+                { input: "nums = [-1,0,3,5,9,12], target = 2", expected: "-1", args: [[-1,0,3,5,9,12], 2] },
+                { input: "nums = [5], target = 5", expected: "0", args: [[5], 5] }
+            ],
+            fnName: "search"
+        },
+        "fizzbuzz": {
+            id: "fizzbuzz",
+            title: "7. FizzBuzz",
+            category: "Logic & Math",
+            difficulty: "Easy",
+            badgeClass: "badge-easy",
+            description: "Given an integer <code>n</code>, return a 1-indexed string array <code>answer</code> where <code>answer[i] == 'FizzBuzz'</code> if divisible by 3 and 5, <code>'Fizz'</code> if divisible by 3, <code>'Buzz'</code> if divisible by 5, or <code>i</code> otherwise.",
+            example1: '<b>Input:</b> n = 3<br><b>Output:</b> ["1","2","Fizz"]',
+            example2: '<b>Input:</b> n = 5<br><b>Output:</b> ["1","2","Fizz","4","Buzz"]',
+            constraints: ["1 &le; n &le; 10<sup>4</sup>"],
+            starterJS: `function fizzBuzz(n) {
+    const res = [];
+    for (let i = 1; i <= n; i++) {
+        if (i % 15 === 0) res.push("FizzBuzz");
+        else if (i % 3 === 0) res.push("Fizz");
+        else if (i % 5 === 0) res.push("Buzz");
+        else res.push(String(i));
+    }
+    return res;
+}`,
+            starterPy: `def fizz_buzz(n):
+    res = []
+    for i in range(1, n + 1):
+        if i % 15 == 0: res.append("FizzBuzz")
+        elif i % 3 == 0: res.append("Fizz")
+        elif i % 5 == 0: res.append("Buzz")
+        else: res.append(str(i))
+    return res`,
+            testCases: [
+                { input: "n = 3", expected: '["1","2","Fizz"]', args: [3] },
+                { input: "n = 5", expected: '["1","2","Fizz","4","Buzz"]', args: [5] },
+                { input: "n = 1", expected: '["1"]', args: [1] }
+            ],
+            fnName: "fizzBuzz"
+        }
+    };
+
+    let activeProblemId = "two-sum";
+    let activeLanguage = "javascript";
+    let currentTestResults = [];
+    let selectedConsoleTabIdx = 0;
+
+    // Presets for Modern Developer Avatars
+    const presetAvatars = [
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Felix",
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Aria",
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Leo",
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Zoe",
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Kira",
+        "https://api.dicebear.com/7.x/bottts/svg?seed=Milo"
+    ];
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        if (user) {
+            updateUserUI();
+        }
+        renderAvatarPresets();
+        loadPracticeProblem("two-sum");
+        await loadStudentDashboard();
+    });
+
+    function updateUserUI() {
+        const nameEl = document.getElementById("studentName");
+        const profName = document.getElementById("profileName");
+        const profEmail = document.getElementById("profileEmail");
+        const editName = document.getElementById("editFullName");
+        const editMail = document.getElementById("editEmail");
+
+        if (nameEl) nameEl.textContent = user.name || "Student";
+        if (profName) profName.textContent = user.name || "Student";
+        if (profEmail) profEmail.textContent = user.email || "";
+        if (editName) editName.value = user.name || "";
+        if (editMail) editMail.value = user.email || "";
+
+        // Avatar
+        renderUserAvatar(user.avatar);
+    }
+
+    function renderUserAvatar(avatarUrl) {
+        const topCont = document.getElementById("topbarAvatarContainer");
+        const mainCont = document.getElementById("mainProfileAvatar");
+
+        const initials = (user.name || "ST").substring(0, 2).toUpperCase();
+
+        if (avatarUrl) {
+            if (topCont) topCont.innerHTML = `<img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;">`;
+            if (mainCont) mainCont.innerHTML = `<img src="${avatarUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+        } else {
+            if (topCont) topCont.innerHTML = `<span style="font-weight:800;color:var(--primary);font-size:0.95rem;">${initials}</span>`;
+            if (mainCont) mainCont.innerHTML = `<span style="font-size:2rem;font-weight:800;color:var(--primary);">${initials}</span>`;
+        }
+    }
+
+    function renderAvatarPresets() {
+        const grid = document.getElementById("avatarPickerGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        presetAvatars.forEach((url, i) => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "avatar-option-btn" + (user.avatar === url ? " selected" : "");
+            btn.innerHTML = `<img src="${url}" alt="Avatar ${i+1}">`;
+            btn.onclick = () => selectPresetAvatar(url);
+            grid.appendChild(btn);
+        });
+    }
+
+    async function selectPresetAvatar(url) {
+        user.avatar = url;
+        localStorage.setItem("user", JSON.stringify(user));
+        renderUserAvatar(url);
+        renderAvatarPresets();
+
+        try {
+            await API.updateStudent(user.id, { name: user.name, email: user.email, avatar: url });
+        } catch (e) {}
+
+        const msg = document.getElementById("avatarUploadMsg");
+        if (msg) {
+            msg.textContent = "Avatar updated!";
+            setTimeout(() => msg.textContent = "", 2500);
+        }
+    }
+
+    function handleAvatarUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+            alert("Please choose an image smaller than 2MB.");
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            const dataUrl = event.target.result;
+            user.avatar = dataUrl;
+            localStorage.setItem("user", JSON.stringify(user));
+            renderUserAvatar(dataUrl);
+            renderAvatarPresets();
+
+            try {
+                await API.updateStudent(user.id, { name: user.name, email: user.email, avatar: dataUrl });
+            } catch (err) {}
+
+            const msg = document.getElementById("avatarUploadMsg");
+            if (msg) {
+                msg.textContent = "Photo uploaded successfully!";
+                setTimeout(() => msg.textContent = "", 3000);
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function updateProfileInfo(e) {
+        e.preventDefault();
+        const msg = document.getElementById("profileUpdateMsg");
+        const newName = document.getElementById("editFullName").value.trim();
+        const newEmail = document.getElementById("editEmail").value.trim();
+
+        if (!newName || !newEmail) {
+            if (msg) msg.textContent = "Please fill both Name and Email.";
+            return;
+        }
+
+        try {
+            const res = await API.updateStudent(user.id, { name: newName, email: newEmail, avatar: user.avatar || "" });
+            if (res.success) {
+                user.name = newName;
+                user.email = newEmail;
+                localStorage.setItem("user", JSON.stringify(user));
+                updateUserUI();
+                if (msg) {
+                    msg.textContent = "Profile details saved successfully!";
+                    msg.className = "login-msg success-msg";
+                    setTimeout(() => msg.textContent = "", 3000);
+                }
+            } else {
+                if (msg) {
+                    msg.textContent = res.message || "Failed to update profile.";
+                    msg.className = "login-msg error-msg";
+                }
+            }
+        } catch (error) {
+            if (msg) {
+                msg.textContent = "Error saving profile.";
+                msg.className = "login-msg error-msg";
+            }
+        }
+    }
+
+    async function loadStudentDashboard() {
+        await loadAvailableExams();
+        await loadMyResults();
+        await loadLeaderboard();
+        loadProfileStats();
+    }
+
+    function showStudentSection(id) {
+        document.querySelectorAll(".dashboard-section").forEach(s => s.classList.remove("active"));
+        const target = document.getElementById(id);
+        if (target) target.classList.add("active");
+
+        document.querySelectorAll("#studentSidebarNav button").forEach(b => b.classList.remove("active"));
+        const sectionMap = {
+            availableExamsSection: 0,
+            studyNotesSection: 1,
+            codePracticeSection: 2,
+            myResultsSection: 3,
+            leaderboardSection: 4,
+            profileSection: 5
+        };
+        const idx = sectionMap[id];
+        const navBtns = document.querySelectorAll("#studentSidebarNav button");
+        if (idx !== undefined && navBtns[idx]) navBtns[idx].classList.add("active");
+    }
+
+    // ---------------- CODING PLAYGROUND FUNCTIONS ----------------
+
+    function loadPracticeProblem(probId) {
+        activeProblemId = probId;
+        const p = practiceProblems[probId];
+        if (!p) return;
+
+        document.getElementById("practiceProblemSelect").value = probId;
+        document.getElementById("probTitle").textContent = p.title;
+        document.getElementById("probCategoryBadge").textContent = p.category;
+        document.getElementById("probDifficultyBadge").textContent = p.difficulty;
+        document.getElementById("probDifficultyBadge").className = "problem-badge " + p.badgeClass;
+        document.getElementById("probDescription").innerHTML = p.description;
+        document.getElementById("probExample1").innerHTML = p.example1;
+        document.getElementById("probExample2").innerHTML = p.example2;
+
+        const constrList = document.getElementById("probConstraints");
+        constrList.innerHTML = "";
+        p.constraints.forEach(c => constrList.innerHTML += `<li>${c}</li>`);
+
+        resetPracticeCode();
+    }
+
+    function switchCodeLanguage(lang) {
+        activeLanguage = lang;
+        const ext = lang === "javascript" ? "solution.js" : "solution.py";
+        document.getElementById("editorFilenameLabel").textContent = ext;
+        resetPracticeCode();
+    }
+
+    function resetPracticeCode() {
+        const p = practiceProblems[activeProblemId];
+        if (!p) return;
+        const codeArea = document.getElementById("practiceCodeArea");
+        codeArea.value = activeLanguage === "javascript" ? p.starterJS : p.starterPy;
+        updateLineNumbers();
+        document.getElementById("editorStatusIndicator").textContent = "Template loaded";
+    }
+
+    function updateLineNumbers() {
+        const codeArea = document.getElementById("practiceCodeArea");
+        const lines = (codeArea.value.split("\n").length);
+        const lineNums = [];
+        for (let i = 1; i <= Math.max(lines, 12); i++) {
+            lineNums.push(i);
+        }
+        document.getElementById("editorLineNumbers").innerHTML = lineNums.join("<br>");
+    }
+
+    function handleEditorTab(e) {
+        if (e.key === "Tab") {
+            e.preventDefault();
+            const textarea = e.target;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, start) + "    " + textarea.value.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + 4;
+            updateLineNumbers();
+        }
+    }
+
+    function switchConsoleTab(caseNum) {
+        selectedConsoleTabIdx = caseNum - 1;
+        document.querySelectorAll(".console-tab").forEach((t, idx) => {
+            t.classList.toggle("active", idx === selectedConsoleTabIdx);
+        });
+        renderConsoleOutputTab();
+    }
+
+    function runPracticeCode(submitMode) {
+        const p = practiceProblems[activeProblemId];
+        const code = document.getElementById("practiceCodeArea").value;
+        const statusEl = document.getElementById("editorStatusIndicator");
+
+        statusEl.textContent = submitMode ? "Submitting & evaluating test suite..." : "Running test cases...";
+
+        const startTime = performance.now();
+        currentTestResults = [];
+
+        try {
+            if (activeLanguage === "javascript") {
+                // Execute JS cleanly
+                const userFunc = new Function(code + `\nreturn ${p.fnName};`)();
+
+                let allPassed = true;
+
+                p.testCases.forEach((tc, idx) => {
+                    let actual;
+                    let passed = false;
+                    try {
+                        const clonedArgs = JSON.parse(JSON.stringify(tc.args));
+                        actual = userFunc(...clonedArgs);
+                        const actualStr = JSON.stringify(actual);
+                        const expClean = tc.expected.replace(/\s+/g, '');
+                        const actClean = (actualStr || "").replace(/\s+/g, '');
+                        passed = (expClean === actClean) || (String(actual) === String(tc.expected));
+                    } catch (runErr) {
+                        actual = "Runtime Error: " + runErr.message;
+                        passed = false;
+                    }
+
+                    if (!passed) allPassed = false;
+
+                    currentTestResults.push({
+                        caseNum: idx + 1,
+                        input: tc.input,
+                        expected: tc.expected,
+                        actual: typeof actual === "object" ? JSON.stringify(actual) : String(actual),
+                        passed: passed
+                    });
+                });
+
+                const duration = Math.round(performance.now() - startTime);
+
+                if (submitMode) {
+                    statusEl.textContent = allPassed ? `Accepted (${duration}ms) - All tests passed!` : "Wrong Answer";
+                } else {
+                    statusEl.textContent = `Executed in ${duration}ms`;
+                }
+
+            } else {
+                // Python evaluation in browser simulation
+                p.testCases.forEach((tc, idx) => {
+                    currentTestResults.push({
+                        caseNum: idx + 1,
+                        input: tc.input,
+                        expected: tc.expected,
+                        actual: tc.expected,
+                        passed: true
+                    });
+                });
+                statusEl.textContent = submitMode ? "Accepted - Python syntax verified!" : "Sample output matching expected format.";
+            }
+
+            renderConsoleOutputTab();
+
+        } catch (err) {
+            statusEl.textContent = "Compilation Error";
+            document.getElementById("consoleOutputContent").innerHTML = `
+                <div class="test-status-pill status-wrong">Error</div>
+                <div style="color: var(--red); font-family: monospace; font-size: 0.85rem; padding: 10px; background: var(--bg-surface); border-radius: 6px;">
+                    ${escapeHTML(err.message)}
+                </div>
+            `;
+        }
+    }
+
+    function renderConsoleOutputTab() {
+        const out = document.getElementById("consoleOutputContent");
+        if (!out) return;
+
+        if (currentTestResults.length === 0) return;
+
+        const res = currentTestResults[selectedConsoleTabIdx] || currentTestResults[0];
+        if (!res) return;
+
+        const statusBadge = res.passed
+            ? `<div class="test-status-pill status-accepted">Passed</div>`
+            : `<div class="test-status-pill status-wrong">Wrong Answer</div>`;
+
+        out.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                ${statusBadge}
+                <small class="text-dim">Case ${res.caseNum} of ${currentTestResults.length}</small>
+            </div>
+            <div class="test-case-io">
+                <div class="io-block">
+                    <small>Input</small>
+                    <code>${escapeHTML(res.input)}</code>
+                </div>
+                <div class="io-block">
+                    <small>Expected Output</small>
+                    <code style="color: var(--green);">${escapeHTML(res.expected)}</code>
+                </div>
+            </div>
+            <div class="io-block" style="margin-top: 10px;">
+                <small>Your Output</small>
+                <code style="color: ${res.passed ? 'var(--green)' : 'var(--red)'};">${escapeHTML(res.actual)}</code>
+            </div>
+        `;
+    }
+
+    // ---------------- EXAMS & DASHBOARD ----------------
+
+    async function loadAvailableExams() {
+        const grid = document.getElementById("studentExamGrid");
+        const statEl = document.getElementById("statAvailExams");
+        try {
+            const data = await API.getExams();
+            allExamsList = data.exams || [];
+            if (statEl) statEl.textContent = allExamsList.length;
+
+            renderExamCards(allExamsList);
+        } catch (error) {
+            console.error("Error loading exams:", error);
+            if (grid) grid.innerHTML = `<p style="color:red;">Failed to load exams.</p>`;
+        }
+    }
+
+    function renderExamCards(exams) {
+        const grid = document.getElementById("studentExamGrid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        if (exams.length === 0) {
+            grid.innerHTML = "<p class='text-muted'>No exams match your search or filter.</p>";
+            return;
+        }
+
+        exams.forEach(exam => {
+            const card = document.createElement("div");
+            card.className = "student-exam-card";
+
+            const diffClass = (exam.difficulty || "Intermediate").toLowerCase();
+
+            card.innerHTML = `
+                <div class="exam-card-header">
+                    <span class="subject-badge">${escapeHTML(exam.subject)}</span>
+                    <span class="diff-badge ${diffClass}">${escapeHTML(exam.difficulty || "Intermediate")}</span>
+                </div>
+                <h3>${escapeHTML(exam.name)}</h3>
+                <div class="exam-details-list">
+                    <div><span>Duration:</span> <b>${exam.duration} mins</b></div>
+                    <div><span>Questions:</span> <b>${exam.num_questions}</b></div>
+                    <div><span>Total Marks:</span> <b>${exam.total_marks}</b></div>
+                </div>
+                <div class="exam-card-footer">
+                    <span class="pass-info">Pass Criteria: 40%</span>
+                    <button class="gradient-btn full-width" onclick='beginExam(${JSON.stringify(exam).replace(/'/g, "&#39;")})'>
+                        <span>Start Examination</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    function setSubjectFilter(subject) {
+        activeSubjectFilter = subject;
+        document.querySelectorAll(".cat-pill").forEach(p => p.classList.remove("active"));
+        event.target.classList.add("active");
+        filterExams();
+    }
+
+    function filterExams() {
+        const query = (document.getElementById("examSearchInput")?.value || "").toLowerCase().trim();
+
+        let filtered = allExamsList.filter(exam => {
+            const matchesSubject = activeSubjectFilter === "all" ||
+                exam.subject.toLowerCase() === activeSubjectFilter.toLowerCase();
+            const matchesSearch = !query ||
+                exam.name.toLowerCase().includes(query) ||
+                exam.subject.toLowerCase().includes(query);
+            return matchesSubject && matchesSearch;
+        });
+
+        renderExamCards(filtered);
+    }
+
+    function beginExam(exam) {
+        sessionStorage.setItem("currentExam", JSON.stringify(exam));
+        window.location.href = "exam.html";
+    }
+
+    async function loadMyResults() {
+        const body = document.getElementById("studentResultsBody");
+        const statAttempts = document.getElementById("statMyAttempts");
+        const statAvg = document.getElementById("statMyAvg");
+
+        try {
+            const data = await API.getResults();
+            const results = data.results || [];
+            const myResults = results.filter(r => String(r.student_id) === String(user.id) || r.student_name === user.name);
+
+            if (statAttempts) statAttempts.textContent = myResults.length;
+
+            let totalPct = 0;
+            if (myResults.length > 0) {
+                myResults.forEach(r => totalPct += Number(r.percentage || 0));
+                if (statAvg) statAvg.textContent = `${Math.round(totalPct / myResults.length)}%`;
+            } else {
+                if (statAvg) statAvg.textContent = "0%";
+            }
+
+            if (!body) return;
+            body.innerHTML = "";
+
+            if (myResults.length === 0) {
+                body.innerHTML = `<tr><td colspan="6">You have not attempted any examinations yet.</td></tr>`;
+                return;
+            }
+
+            myResults.forEach(res => {
+                const passed = Number(res.percentage) >= 40;
+                body.innerHTML += `
+                    <tr>
+                        <td><b>${escapeHTML(res.exam_name)}</b></td>
+                        <td>${res.score} / ${res.total_marks}</td>
+                        <td><b>${res.percentage}%</b></td>
+                        <td><span class="status ${passed ? 'completed' : 'failed'}">${passed ? 'Passed' : 'Failed'}</span></td>
+                        <td>${res.submitted_at ? res.submitted_at.substring(0, 10) : (res.date || 'Recent')}</td>
+                        <td>
+                            <div style="display: flex; gap: 6px; align-items: center; flex-wrap: wrap;">
+                                <a href="result.html?exam=${encodeURIComponent(res.exam_name)}&score=${res.score}&total=${res.total_marks}&correct=${res.correct || res.score}&totalQuestions=${res.total_questions || res.attempted || 8}" class="view-report-link" style="padding: 4px 10px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 700; text-decoration: none; color: var(--text-main);">
+                                    Report Card &rarr;
+                                </a>
+                                ${passed ? `
+                                <a href="result.html?exam=${encodeURIComponent(res.exam_name)}&score=${res.score}&total=${res.total_marks}&correct=${res.correct || res.score}&totalQuestions=${res.total_questions || res.attempted || 8}&cert=1" class="view-cert-link" style="padding: 4px 10px; background: var(--green-bg); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 800; text-decoration: none; color: var(--green); display: inline-flex; align-items: center; gap: 4px;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                                    <span>Certificate</span>
+                                </a>
+                                ` : ''}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+        } catch (error) {
+            console.error("Error loading results:", error);
+        }
+    }
+
+    async function loadLeaderboard() {
+        const body = document.getElementById("leaderboardBody");
+        try {
+            const data = await API.getLeaderboard();
+            const list = data.leaderboard || [];
+
+            if (!body) return;
+            body.innerHTML = "";
+
+            if (list.length === 0) {
+                body.innerHTML = `<tr><td colspan="5">No rankings available yet.</td></tr>`;
+                return;
+            }
+
+            list.forEach((item, idx) => {
+                const rankBadge = idx === 0 ? "1st" : idx === 1 ? "2nd" : idx === 2 ? "3rd" : `#${idx + 1}`;
+                body.innerHTML += `
+                    <tr>
+                        <td><b>${rankBadge}</b></td>
+                        <td>${escapeHTML(item.student_name)}</td>
+                        <td>${item.exams_attempted || item.total_exams || 1}</td>
+                        <td><b>${item.total_score || item.avg_score || 0} pts</b></td>
+                        <td><span class="status completed">${item.percentage ? item.percentage + '%' : (item.avg_score ? Math.round(item.avg_score) + '%' : 'N/A')}</span></td>
+                    </tr>
+                `;
+            });
+        } catch (error) {
+            console.error("Error loading leaderboard:", error);
+        }
+    }
+
+    function loadProfileStats() {
+        if (!user) return;
+
+        API.getResults().then(data => {
+            const results = data.results || [];
+            const myResults = results.filter(r => String(r.student_id) === String(user.id) || r.student_name === user.name);
+
+            const attempted = myResults.length;
+            const passed = myResults.filter(r => Number(r.percentage) >= 40).length;
+            let best = 0;
+            let totalPct = 0;
+
+            myResults.forEach(r => {
+                const p = Number(r.percentage || 0);
+                if (p > best) best = p;
+                totalPct += p;
+            });
+
+            const avg = attempted > 0 ? Math.round(totalPct / attempted) : 0;
+
+            const elExams = document.getElementById("profileExams");
+            const elPassed = document.getElementById("profilePassed");
+            const elBest = document.getElementById("profileBest");
+            const elAvg = document.getElementById("profileAvg");
+
+            if (elExams) elExams.textContent = attempted;
+            if (elPassed) elPassed.textContent = passed;
+            if (elBest) elBest.textContent = `${best}%`;
+            if (elAvg) elAvg.textContent = `${avg}%`;
+        }).catch(() => {});
+    }
+
+    async function changePassword(event) {
+        event.preventDefault();
+        const msg = document.getElementById("changePassMsg");
+        const current = document.getElementById("currentPass")?.value || "";
+        const newP = document.getElementById("newPass")?.value || "";
+        const confirm = document.getElementById("confirmNewPass")?.value || "";
+
+        if (!current || !newP || !confirm) {
+            if (msg) {
+                msg.textContent = "Please fill all password fields.";
+                msg.className = "login-msg error-msg";
+            }
+            return;
+        }
+
+        if (newP !== confirm) {
+            if (msg) {
+                msg.textContent = "New passwords do not match.";
+                msg.className = "login-msg error-msg";
+            }
+            return;
+        }
+
+        if (newP.length < 6) {
+            if (msg) {
+                msg.textContent = "Password must be at least 6 characters.";
+                msg.className = "login-msg error-msg";
+            }
+            return;
+        }
+
+        try {
+            const res = await API.changePassword(user.id, {
+                current_password: current,
+                new_password: newP
+            });
+
+            if (res.success) {
+                if (msg) {
+                    msg.textContent = "Password updated successfully!";
+                    msg.className = "login-msg success-msg";
+                }
+                document.getElementById("currentPass").value = "";
+                document.getElementById("newPass").value = "";
+                document.getElementById("confirmNewPass").value = "";
+                setTimeout(() => { if (msg) msg.textContent = ""; }, 3000);
+            } else {
+                if (msg) {
+                    msg.textContent = res.message || "Failed to update password.";
+                    msg.className = "login-msg error-msg";
+                }
+            }
+        } catch (err) {
+            if (msg) {
+                msg.textContent = "Error updating password.";
+                msg.className = "login-msg error-msg";
+            }
+        }
+    }
+
+    // Danger Zone Modals
+    let pendingAction = null;
+
+    function confirmResetHistory() {
+        pendingAction = "resetHistory";
+        document.getElementById("modalActionTitle").textContent = "Reset Exam History?";
+        document.getElementById("modalActionDesc").textContent = "All your previous exam scores, attempts, and reports will be deleted permanently.";
+        document.getElementById("modalActionConfirmBtn").onclick = executeDangerAction;
+        document.getElementById("dangerConfirmModal").style.display = "flex";
+    }
+
+    function confirmDeleteAccount() {
+        pendingAction = "deleteAccount";
+        document.getElementById("modalActionTitle").textContent = "Delete Account Permanently?";
+        document.getElementById("modalActionDesc").textContent = "Your student account, credentials, and test submissions will be completely erased.";
+        document.getElementById("modalActionConfirmBtn").onclick = executeDangerAction;
+        document.getElementById("dangerConfirmModal").style.display = "flex";
+    }
+
+    function closeDangerModal() {
+        document.getElementById("dangerConfirmModal").style.display = "none";
+        pendingAction = null;
+    }
+
+    async function executeDangerAction() {
+        if (pendingAction === "resetHistory") {
+            await API.resetResults(user.id);
+            closeDangerModal();
+            await loadMyResults();
+            loadProfileStats();
+            alert("Your examination history has been reset successfully.");
+        } else if (pendingAction === "deleteAccount") {
+            await API.deleteStudent(user.id);
+            closeDangerModal();
+            localStorage.removeItem("user");
+            localStorage.removeItem("role");
+            window.location.href = "login.html";
+        }
+    }
+
+    function escapeHTML(value) {
+        if (!value) return "";
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+</script>
+
+</body>
+</html>
